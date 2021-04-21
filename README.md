@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Welcome to Plug&Roll frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is amazing for you if you want to discover a new programing way, new releases everyday, impressive actualizations, and fun
 
 ## Available Scripts
 
