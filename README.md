@@ -1,6 +1,6 @@
 # Welcome to Plug&Roll frontend
 
-This project is amazing for you if you want to discover a new programing way, new releases everyday, impressive actualizations, and fun
+This project is amazing for you if you want to discover a new programing way, new releases everyday, impressive actualizations, and FUN.
 
 ## Available Scripts
 
