@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AuthService } from "../../Services/AuthService";
 import { PruebaService } from "../../Services/PruebaService";
 
 class PruebaComponent extends Component{
@@ -27,7 +28,11 @@ class PruebaComponent extends Component{
             <div>
                 <br />
                 <br />
-                {this.showPruebas()}
+                {AuthService.isAuthenticated?
+                this.showPruebas()
+                :
+                this.props.history.push()
+                }
             </div>
         )
     }
