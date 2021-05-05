@@ -19,7 +19,7 @@ class PruebaComponent extends Component{
 
     showPruebas(){
         return (
-            <div>{this.state.pruebas.map((prueba) => {return (prueba.image+", ")})}</div>
+            <div>{this.state.pruebas.map((prueba) => {return (<img src={"data:image/png;base64," + prueba.image} style={{ maxWidth: '300px', maxHeight: '250px' }}/>)})}</div>
         )
     }
     render(){
