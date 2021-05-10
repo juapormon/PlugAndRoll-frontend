@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../assets/logomejorado.png'
+import logo from '../assets/logoplug&rolL.png'
 import '../App.css';
 import { AuthService } from '../Services/AuthService';
 
@@ -31,21 +31,21 @@ class HeaderComponent extends Component {
   render() {
     return (
       <div className="topnav" id="myTopnav">
-        <a href="/"><img src={logo} className="plugandroll-logo" /></a>
-        <a href="/#">Cajas Rojas</a>
-        <a href="/#">Juan Carlos</a>
-        <a href="/#">Foros</a>
-        <a href="/#">FAQ</a>
-        <a href="/#">About us</a>
+        <a href="/" className="logo"><img src={logo} className="plugandroll-logo" /></a>
+        <a href="/#" className="item">Cajas Rojas</a>
+        <a href="/#" className="item">Juan Carlos</a>
+        <a href="/#" className="item">Foros</a>
+        <a href="/#" className="item">FAQ</a>
+        <a href="/about-us" className="item">About us</a>
         {AuthService.isAuthenticated() ?
           <React.Fragment>
-            <a href="/" style={{ float: "right", backgroundColor: "#cf0000" }} onClick={this.logout}>Logout</a>
-            <a href="/#" style={{ float: "right", backgroundColor: "#2f47b4" }}>{AuthService.getUserData()['username']}</a>
+            <a href="/" className="login" style={{ float: "right", backgroundColor: "#cf0000" }} onClick={this.logout}>Logout</a>
+            <a href="/#" className="login"  style={{ float: "right", backgroundColor: "#2f47b4" }}>{AuthService.getUserData()['username']}</a>
           </React.Fragment>
           :
           <React.Fragment>
-            <a href="/sign-up" style={{ float: "right", backgroundColor: "#2f47b4" }}>Sign-up</a>
-            <a href="/login" style={{ float: "right", backgroundColor: "#2f47b4" }}>Login</a>
+            <a href="/sign-up" className="login"  style={{ float: "right", backgroundColor: "#2f47b4" }}>Sign-up</a>
+            <a href="/login"  className="login"  style={{ float: "right", backgroundColor: "#2f47b4" }}>Login</a>
           </React.Fragment>
         }
 

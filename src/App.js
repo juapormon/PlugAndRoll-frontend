@@ -6,6 +6,7 @@ import LoginComponent from './Components/LoginComponent';
 import FooterComponent from './Components/FooterComponent';
 import HeaderComponent from './Components/HeaderComponent';
 import HomeComponent from './Components/HomeComponent';
+import AboutUsComponent from './Components/AboutUsComponent';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/prueba" exact component={PruebaComponent}></Route>
               <Route path="/login" exact component={LoginComponent}></Route>
               <Route path="/" exact component={HomeComponent}></Route>
+              <Route path="/about-us" exact component={AboutUsComponent}></Route>
             </Switch>
           </div>
         </body>
