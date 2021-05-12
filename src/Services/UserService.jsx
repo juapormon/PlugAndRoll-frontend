@@ -4,8 +4,14 @@ import { UrlProvider } from '../Providers/UrlProvider';
 
 export const UserService = {
 
-    async login(username, password) {
-        return axios.post(UrlProvider.getUserURL() + '/login?username='+ username +'&password=' + password)
+    async signup(signupData) {
+        return axios.post(UrlProvider.getUserURL() + '/signup', signupData)
+        .then(res => res.data)
+        .catch(error => {return error.response.status})
+    },
+    
+    async login(loginData) {
+        return axios.post(UrlProvider.getUserURL() + '/login', loginData)
         .then(res => res.data)
         .catch(error => { return error.response.status })
     },
