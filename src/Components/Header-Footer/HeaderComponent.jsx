@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from '../assets/logomejorado.png'
-import '../App.css';
-import { AuthService } from '../Services/AuthService';
+import logo from '../../assets/logomejorado.png'
+import '../../App.css';
+import { AuthService } from '../../Services/AuthService';
 
 class HeaderComponent extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class HeaderComponent extends Component {
   render() {
     return (
       <div className="topnav" id="myTopnav">
-        <a href="/"><img src={logo} className="plugandroll-logo" /></a>
+        <a href="/"><img src={logo} className="plugandroll-logo" height="50"/></a>
         <a href="/#">Cajas Rojas</a>
         <a href="/#">Juan Carlos</a>
         <a href="/#">Foros</a>
@@ -44,7 +44,7 @@ class HeaderComponent extends Component {
           </React.Fragment>
           :
           <React.Fragment>
-            <a href="/sign-up" style={{ float: "right", backgroundColor: "#2f47b4" }}>Sign-up</a>
+            <a href="/signup" style={{ float: "right", backgroundColor: "#2f47b4" }}>Sign-up</a>
             <a href="/login" style={{ float: "right", backgroundColor: "#2f47b4" }}>Login</a>
           </React.Fragment>
         }
