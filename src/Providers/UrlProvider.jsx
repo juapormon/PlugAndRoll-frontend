@@ -1,6 +1,7 @@
 const baseUrl = "http://localhost:8080"
 const userUrl = "/users"
 const meUrl = '/me'
+const forums = '/forums'
 
 export const UrlProvider = {
     
@@ -9,6 +10,9 @@ export const UrlProvider = {
     },
     getMeURL(){
         return baseUrl + userUrl + meUrl;
+    },
+    getForumURL(){
+        return baseUrl + forums;
     }
     
 }
