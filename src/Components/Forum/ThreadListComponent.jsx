@@ -6,6 +6,7 @@ import ReactPaginate from 'react-paginate';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image'
 import { AuthService } from '../../Services/AuthService';
+import { ThreadService } from '../../Services/ThreadService';
 
 class ThreadListComponent extends Component {
 
@@ -13,8 +14,8 @@ class ThreadListComponent extends Component {
     super(props)
 
     this.state = {
-      forums: [],
-      rawForums: [],
+      threads: [],
+      rawthreads: [],
       offset: 0,
       perPage: 5,
       pageCount: 0, 
@@ -33,57 +34,45 @@ class ThreadListComponent extends Component {
     })
   }
   loadMoreData() {
-    const data = this.state.rawForums;
+    const data = this.state.rawthreads;
 
     const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
     this.setState({
       pageCount: Math.ceil(data.length / this.state.perPage),
-      forums: slice
+      threads: slice
     })
   }
 
   componentDidMount() {
-    if(AuthService.isAuthenticated()){
-      ForumService.getForumsAuth().then((res) => {
+      ThreadService.findByForum(this.props.match.params[0]).then((res) => {
         var slice = res.slice(this.state.offset, this.state.offset + this.state.perPage)
     
       this.setState({
-        forums: slice,
+        threads: slice,
         pageCount: Math.ceil(res.length / this.state.perPage),
-        rawForums: res
+        rawThreads: res
         });
       })
-    }else{
-      ForumService.getForumsNoAuth().then((res) => {
-        var slice = res.slice(this.state.offset, this.state.offset + this.state.perPage)
-    
-      this.setState({
-        forums: slice,
-        pageCount: Math.ceil(res.length / this.state.perPage),
-        rawForums: res
-        });
-      })
-    }
   }
 
   render() {
 
     return (
       <div>
-        <h2 className="text-center">Forums</h2>
-        {this.state.forums.map(
-          forum =>
+        <h2 ></h2>
+        {this.state.threads.map(
+          thread =>
             <div>
-                <Card style={{backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
+                <div style={{backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
                 <div className="container">
-                <a href={"/threads/findByForum/"+forum.id} style={{textDecoration:"none",color:"white"}}>
-                    <h5 style={{marginLeft:"2rem", marginRight:"5rem"}} >{forum.title}</h5>
-                  <Card.Body>
-                    <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>Forum for: {forum.type.join(', ')}</p>
-                  </Card.Body>
+                <a href={"/publications/"+thread.id} style={{textDecoration:"none",color:"white"}}>
+                    <h5 style={{marginLeft:"2rem", marginRight:"5rem"}} >{thread.title}</h5>
+                  
+                    <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>Thr for: +ç</p>
+                  
                   </a>
                 </div>
-                </Card>
+                </div>
             </div>
         )
         }

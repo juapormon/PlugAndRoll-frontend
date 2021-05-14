@@ -70,7 +70,9 @@ class ForumListComponent extends Component {
 
     return (
       <div>
-        <h2 className="text-center">Forums</h2>
+        <br/>
+        <br/>
+        <h2 className="text-center" >Forums</h2>
         {this.state.forums.map(
           forum =>
             <div>
