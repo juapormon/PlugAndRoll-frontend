@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import logo from '../assets/logoplug&rolL.png'
-import '../App.css';
+import logo from '../assets/logo.png'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { AuthService } from '../Services/AuthService';
 
 class HeaderComponent extends Component {
@@ -30,26 +33,46 @@ class HeaderComponent extends Component {
 
   render() {
     return (
-      <div className="topnav" id="myTopnav">
-        <a href="/" className="logo"><img src={logo} className="plugandroll-logo" /></a>
-        <a href="/#" className="item">Cajas Rojas</a>
-        <a href="/#" className="item">Juan Carlos</a>
-        <a href="/#" className="item">Foros</a>
-        <a href="/#" className="item">FAQ</a>
-        <a href="/about-us" className="item">About us</a>
-        {AuthService.isAuthenticated() ?
-          <React.Fragment>
-            <a href="/" className="login" style={{ float: "right", backgroundColor: "#cf0000" }} onClick={this.logout}>Logout</a>
-            <a href="/#" className="login"  style={{ float: "right", backgroundColor: "#2f47b4" }}>{AuthService.getUserData()['username']}</a>
-          </React.Fragment>
-          :
-          <React.Fragment>
-            <a href="/sign-up" className="login"  style={{ float: "right", backgroundColor: "#2f47b4" }}>Sign-up</a>
-            <a href="/login"  className="login"  style={{ float: "right", backgroundColor: "#2f47b4" }}>Login</a>
-          </React.Fragment>
-        }
-
-        <a href="#!" className="icon" onClick={this.showElements}>&#9776;</a>
+      <div>
+        <nav className="navbar navbar-expand-sm bg-dark navbar-dark" id="myTopnav">
+            <a className="navbar-brand" href="/">
+              <img src={logo} alt="logo" style={{width: '55px'}}/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <a className="nav-link" href="/#">Cajas Rojas</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/#">Juan Carlos</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/#">Foros</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/#">FAQ</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/about-us">About us</a>
+                  </li>
+                
+            {AuthService.isAuthenticated() ?
+              <React.Fragment>
+                <li className="nav-item"><a href="/" className="nav-link" onClick={this.logout}>Logout</a></li>
+                <li className="nav-item"><a href="/#" className="nav-link" >{AuthService.getUserData()['username']}</a></li>
+              </React.Fragment>
+              :
+              <React.Fragment>
+                <li className="nav-item"><a href="/sign-up" className="nav-link">Sign-up</a></li>
+                <li className="nav-item"><a href="/login"  className="nav-link">Login</a></li>
+              </React.Fragment>
+            }
+            </ul>
+            </div>
+        </nav>
       </div>
     );
   }
