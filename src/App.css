@@ -63,15 +63,8 @@
   float: left;
   display: block;
   color: #f2f2f2;
-<<<<<<< HEAD
-  background-size:contain;
-  height: 75px;
-  width: 75px;
-  float: "left";
-=======
   text-align: center;
   text-decoration: none;
->>>>>>> develop
 }
 
 /* MVP needed */

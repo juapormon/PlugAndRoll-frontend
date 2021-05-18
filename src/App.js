@@ -8,13 +8,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HeaderComponent from './Components/Header-Footer/HeaderComponent';
 import FooterComponent from './Components/Header-Footer/FooterComponent';
 import HomeComponent from './Components/HomeComponent';
-<<<<<<< HEAD
 import AboutUsComponent from './Components/AboutUsComponent';
-=======
 import SignupComponent from './Components/Signup-Login/SignupComponent';
 import LoginComponent from './Components/Signup-Login/LoginComponent';
 import SuccessfulLoginComponent from './Components/Signup-Login/SuccessfulLoginComponent';
->>>>>>> develop
 
 function App() {
   return (
@@ -26,13 +23,10 @@ function App() {
             <Switch>
               {/* Aqui van los componentes que se creen*/}
               <Route path="/" exact component={HomeComponent}></Route>
-<<<<<<< HEAD
               <Route path="/about-us" exact component={AboutUsComponent}></Route>
-=======
               <Route path="/signup" exact component={SignupComponent}></Route>
               <Route path="/login" exact component={LoginComponent}></Route>
               <Route path="/successfulLogin" exact component={SuccessfulLoginComponent}></Route>
->>>>>>> develop
             </Switch>
           </div>
         </body>
