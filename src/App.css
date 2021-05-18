@@ -60,13 +60,52 @@
 }
 
 .plugandroll-logo{
+  float: left;
+  display: block;
   color: #f2f2f2;
+<<<<<<< HEAD
   background-size:contain;
   height: 75px;
   width: 75px;
   float: "left";
+=======
+  text-align: center;
+  text-decoration: none;
+>>>>>>> develop
 }
 
+/* MVP needed */
+.ValidatorMessage{
+  color:red;
+  font-size: 15px;
+}
+
+.FormStyle {
+  border-radius: 20px;
+  border-color: #b12c2c;
+  border: 3px solid rgb(255, 90, 90);
+  background-color: #fd727267;
+  padding: 40px;
+}
+
+.FormInput{
+  border-radius: 20px;
+  border-color: #b12c2c;
+  border: 3px solid rgb(255, 90, 90);
+  background-color: #fd727267;
+  padding: 10px;
+  color: black;
+}
+
+.basic-multi-select{
+  border-radius: 20px;
+  border-color: #b12c2c;
+  border: 3px solid rgb(255, 90, 90);
+  background-color: #fd727267;
+  padding: 10px;
+  color: black;
+  font-size: 20px;
+}
 
 /*
 Video de youtube #9AD263
