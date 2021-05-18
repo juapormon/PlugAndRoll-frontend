@@ -3,6 +3,8 @@ const userUrl = "/users"
 const meUrl = '/me'
 const forums = '/forums'
 const threads = '/threads'
+const publications = '/publications'
+const spam = '/spam'
 
 export const UrlProvider = {
     
@@ -17,6 +19,12 @@ export const UrlProvider = {
     },
     getThreadURL(){
         return baseUrl + threads;
+    },
+    getPublicationURL(){
+        return baseUrl + publications;
+    },
+    getSpamURL(){
+        return baseUrl + spam;
     }
     
 }

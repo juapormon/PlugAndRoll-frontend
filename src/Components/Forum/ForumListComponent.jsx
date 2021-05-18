@@ -78,7 +78,7 @@ class ForumListComponent extends Component {
             <div>
                 <Card style={{backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
                 <div className="container">
-                <a href={"/threads/findByForum/"+forum.id} style={{textDecoration:"none",color:"white"}}>
+                <a href={"/forums/" + forum.id + "/threads"} style={{textDecoration:"none",color:"white"}}>
                     <h5 style={{marginLeft:"2rem", marginRight:"5rem"}} >{forum.title}</h5>
                   <Card.Body>
                     <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>Forum for: {forum.type.join(', ')}</p>

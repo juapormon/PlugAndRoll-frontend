@@ -2,11 +2,11 @@ import axios from 'axios';
 import { AuthService } from './AuthService';
 import { UrlProvider } from '../Providers/UrlProvider';
 
-export const ThreadService = {
+export const PublicationService = {
 
-    async findByForum(forumId) {
+    async findByThread(threadId) {
         return AuthService.getToken().then(token => {
-            return axios.get(UrlProvider.getThreadURL() + "/findByForum/" + forumId, {
+            return axios.get(UrlProvider.getPublicationURL() + "/findByThread/" + threadId, {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': '*/*'
@@ -15,14 +15,14 @@ export const ThreadService = {
         })
     },
 
-    async findByForumNoAuth(forumId) {
-        return axios.get(UrlProvider.getThreadURL() + "/findByForumNoAuth/" + forumId, {
+    async findByThreadNoAuth(threadId) {
+        return axios.get(UrlProvider.getPublicationURL() + "/findByThreadNoAuth/" + threadId, {
         }).then(res => res.data).catch(error => {return error.response.status})
     },
 
-    async addThread(thread) {
+    async addPublication(publication) {
         return AuthService.getToken().then(token => {
-            return axios.post(UrlProvider.getThreadURL() + "/add", thread, {
+            return axios.post(UrlProvider.getPublicationURL() + "/add", publication, {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': '*/*'
@@ -31,9 +31,9 @@ export const ThreadService = {
         })
     },
 
-    async deleteThread(threadId) {
+    async deletePublication(publicationId) {
         return AuthService.getToken().then(token => {
-            return axios.delete(UrlProvider.getThreadURL().concat(`/delete/${threadId}`), {
+            return axios.delete(UrlProvider.getPublicationURL().concat(`/delete/${publicationId}`), {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': '*/*'
@@ -42,9 +42,9 @@ export const ThreadService = {
         })
     },
 
-    async updateThread(id, thread) {
+    async updatePublication(id, publication) {
         return AuthService.getToken().then(token => {
-            return axios.put(UrlProvider.getThreadURL() + "/edit/" + id, thread, {
+            return axios.put(UrlProvider.getPublicationURL() + "/edit/" + id, publication, {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': '*/*'
@@ -52,18 +52,5 @@ export const ThreadService = {
             }).then(res => res.data)
                 .catch(error => { return error })
         });
-    },
-
-    async closeThread(id, thread) {
-        return AuthService.getToken().then(token => {
-            return axios.put(UrlProvider.getThreadURL() + "/close/" + id, thread, {
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Accept': '*/*'
-                }
-            }).then(res => res.data)
-                .catch(error => { return error })
-        });
-    },
-
+    }
 }
