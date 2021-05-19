@@ -7,6 +7,9 @@ import HomeComponent from './Components/HomeComponent';
 import SignupComponent from './Components/Signup-Login/SignupComponent';
 import LoginComponent from './Components/Signup-Login/LoginComponent';
 import SuccessfulLoginComponent from './Components/Signup-Login/SuccessfulLoginComponent';
+import GuidesComponent from './Components/StarterGuides/GuidesComponent';
+import DmGuideComponent from './Components/StarterGuides/DmGuideComponent';
+import PlayerGuideComponent from './Components/StarterGuides/PlayerGuideComponent';
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
               <Route path="/signup" exact component={SignupComponent}></Route>
               <Route path="/login" exact component={LoginComponent}></Route>
               <Route path="/successfulLogin" exact component={SuccessfulLoginComponent}></Route>
+              <Route path="/guides" exact component={GuidesComponent}></Route>
+              <Route path="/dmGuide" exact component={DmGuideComponent}></Route>
+              <Route path="/playerGuide" exact component={PlayerGuideComponent}></Route>
             </Switch>
           </div>
         </body>
