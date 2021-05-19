@@ -16,11 +16,22 @@ class CreateThreadComponent extends Component {
             titleError: "",
             onlyAuth: false,
             spamError: "",
+            thread: null
         }
 
         this.saveThread = this.saveThread.bind(this);
         this.changeTitleHandler = this.changeTitleHandler.bind(this);
         this.changeOnlyAuthHandler = this.changeOnlyAuthHandler.bind(this);
+    }
+    componentDidMount(){
+        if(this.props.match.params[1]){
+            ThreadService.findById(this.props.match.params[1]).then((res)=>{
+                this.setState({
+                    title:res.title,
+                    onlyAuth:res.onlyAuth
+                })
+            })
+        }
     }
     validate = () => {
         let titleError = "";
@@ -41,12 +52,8 @@ class CreateThreadComponent extends Component {
         this.setState({ title: event.target.value });
     }
 
-    changeOnlyAuthHandler = (event) => {
-        if(event.target.value == "on"){
-            this.setState({ onlyAuth: true});
-        }else{
-            this.setState({ onlyAuth: false});
-        }
+    changeOnlyAuthHandler = () => {
+        this.setState({onlyAuth: !this.state.onlyAuth})
     }
 
     saveThread = (e) => {
@@ -62,9 +69,15 @@ class CreateThreadComponent extends Component {
             
             SpamService.checkThread(threadDTO).then((data)=>{
                 if(data === false){
-                    ThreadService.addThread(thread).then(() => {
-                        this.props.history.push('/forums/'+this.props.match.params[0] + "/threads" );
-                    })
+                    if(this.props.match.params[1]){
+                        ThreadService.updateThread(this.props.match.params[1], thread).then(() => {
+                            this.props.history.push('/forums/'+this.props.match.params[0] + "/threads" );
+                        })
+                    }else{
+                        ThreadService.addThread(thread).then(() => {
+                            this.props.history.push('/forums/'+this.props.match.params[0] + "/threads" );
+                        })
+                    }
                 }else{
                     this.setState({spamError:"This form contains spam words! 😠"})
                 }
@@ -72,34 +85,49 @@ class CreateThreadComponent extends Component {
         }
     }
 
+    createForm(){
+        return(
+            <React.Fragment>
+            <br></br>
+            <br></br>
+            <form >
+            {this.props.match.params[1] != null?
+                <h2 className="text-center">Edit Thread</h2>
+                :
+                <h2 className="text-center">Create Thread</h2>
+            }
+                    <div className="form-group">
+                        <label>Title: </label>
+                        <textarea placeholder="Title" name="title" type="text-box" className="form-control"
+                            value={this.state.title} onChange={this.changeTitleHandler}></textarea>
+
+                        {this.state.titleError ? (<div className="ValidatorMessage">{this.state.titleError}</div>) : null}
+                    </div>
+                    <div className="form-group">
+                    <label>
+                        Private Thread?
+                    <input
+                        name="onlyAuth"
+                        type="checkbox"
+                        checked={this.state.onlyAuth}
+                        onChange={this.changeOnlyAuthHandler} />
+                    </label>
+                    </div>
+                    {this.props.match.params[1] != null?
+                    <button className="button5" variant="outline-success" onClick={this.saveThread}>Edit thread</button>
+                         :
+                    <button className="button5" variant="outline-success" onClick={this.saveThread}>Create thread</button>
+                    }
+                {this.state.spamError?(<p className="text-danger">{this.state.spamError}</p>):null}
+            </form>
+            </React.Fragment>
+        )
+    }
+
     render() {
         return (
             <div>
-
-                <br></br>
-                <br></br>
-                <form >
-                    <h2 className="text-center">Create Thread</h2>
-                        <div className="form-group">
-                            <label>Title: </label>
-                            <textarea placeholder="Title" name="title" type="text-box" className="form-control"
-                                value={this.state.title} onChange={this.changeTitleHandler}></textarea>
-
-                            {this.state.titleError ? (<div className="ValidatorMessage">{this.state.titleError}</div>) : null}
-                        </div>
-                        <div className="form-group">
-                        <label>
-                            Private Thread?
-                        <input
-                            name="onlyAuth"
-                            type="checkbox"
-                            checked={this.state.onlyAuth}
-                            onChange={this.changeOnlyAuthHandler} />
-                        </label>
-                        </div>
-                    <button className="button5" variant="outline-success" onClick={this.saveThread}>Create thread</button>
-                    {this.state.spamError?(<p className="text-danger">{this.state.spamError}</p>):null}
-                </form>
+                {this.createForm()}
             </div>
         );
     }

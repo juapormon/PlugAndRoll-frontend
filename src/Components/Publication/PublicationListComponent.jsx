@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import { AuthService } from '../../Services/AuthService';
 import { PublicationService } from '../../Services/PublicationService';
+import { ThreadService } from '../../Services/ThreadService';
 
 class PublicationListComponent extends Component {
 
@@ -14,9 +15,11 @@ class PublicationListComponent extends Component {
       offset: 0,
       perPage: 5,
       pageCount: 0, 
-      currentPage: 0
+      currentPage: 0,
+      thread: {creator:{username:""}}
     }
     this.handlePageClick = this.handlePageClick.bind(this);
+    this.editThread = this.editThread.bind(this);
   }
   handlePageClick = (e) => {
     const selectedPage = e.selected;
@@ -39,6 +42,12 @@ class PublicationListComponent extends Component {
   }
 
   componentDidMount() {
+    ThreadService.findById(this.props.match.params[0]).then(res => {
+      console.log(res)
+      this.setState({
+        thread:res
+      })})
+      
       if(AuthService.isAuthenticated()){
         PublicationService.findByThread(this.props.match.params[0]).then((res) => {
             var slice = res.slice(this.state.offset, this.state.offset + this.state.perPage)
@@ -47,8 +56,8 @@ class PublicationListComponent extends Component {
             publications: slice,
             pageCount: Math.ceil(res.length / this.state.perPage),
             rawPublications: res
-            });
-        })
+        });
+      })
      }else{
         PublicationService.findByThreadNoAuth(this.props.match.params[0]).then((res) => {
             console.log(res)
@@ -62,12 +71,53 @@ class PublicationListComponent extends Component {
         })
      }
   }
+  
+  deleteThread(threadId){
+    ThreadService.deletePublicationsByThreadId(threadId).then(()=>{
+      ThreadService.deleteThread(threadId).then(res => {
+        alert(res);
+        this.props.history.push("/forums/" + this.state.thread.forum.id + "/threads")
+      })
+    })
+  }
+
+  closeThread(threadId){
+    ThreadService.closeThread(threadId, this.state.thread).then((res)=>{
+      alert(res)
+      window.location.reload()
+    })
+  }
+
+  editThread(){
+    if(AuthService.isAuthenticated()){
+      this.props.history.push("/forums/"+ this.state.thread.forum.id + "/editThread/"+ this.state.thread.id)
+    }else{
+      this.props.history.push("/login")
+    }
+  }
+
 
   render() {
 
     return (
       <div>
-        <h2>Publications</h2>
+        <h2>{this.state.thread.title}</h2>
+        {AuthService.isAuthenticated()?
+            AuthService.getUserData()["username"]===this.state.thread.creator.username || AuthService.getUserData()["roles"].includes("ADMIN")?
+            <React.Fragment>
+              <button className="button5" onClick={() => this.editThread(this.props.match.params[0])}>Edit Thread</button> 
+              <button className="button4" onClick={() => this.deleteThread(this.props.match.params[0])}>Delete Thread</button>
+              {this.state.thread.closeDate?
+              <p>🔐🔐🔐🔐🔐</p>
+              :
+              AuthService.getUserData()["roles"].includes("ADMIN")?
+                <button className="button3" onClick={() => this.closeThread(this.props.match.params[0])}>Close Thread</button>
+                :null
+              }
+            </React.Fragment>
+            :null
+          :null
+        }
         {this.state.publications.map(
           publication =>
               <a href={"/publications/"+publication.id} style={{textDecoration:"none",color:"white"}}>

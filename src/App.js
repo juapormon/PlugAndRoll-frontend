@@ -29,6 +29,7 @@ function App() {
               <Route path="/forums/*/threads" exact component={ThreadListComponent}></Route>
               <Route path="/threads/*/publications" exact component={PublicationListComponent}></Route>
               <Route path="/forums/*/createThread" exact component={CreateThreadComponent}></Route>
+              <Route path="/forums/*/editThread/*" exact component={CreateThreadComponent}></Route>
             </Switch>
           </div>
         </body>

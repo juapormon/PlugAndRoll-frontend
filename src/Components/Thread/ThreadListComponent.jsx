@@ -16,7 +16,8 @@ class ThreadListComponent extends Component {
       offset: 0,
       perPage: 5,
       pageCount: 0, 
-      currentPage: 0
+      currentPage: 0,
+      threadId:""
     }
     this.handlePageClick = this.handlePageClick.bind(this);
     this.createThread = this.createThread.bind(this);
@@ -83,8 +84,10 @@ class ThreadListComponent extends Component {
       <div className='container' style={{width:"60%", height:"5%"}} >
         {this.state.threads.map(
           thread =>
-              <a href={"/threads/"+thread.id+"/publications"} style={{textDecoration:"none",color:"white"}}>
+            <React.Fragment>
+              
                 <div className="container" style={{ backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
+                <a href={"/threads/"+thread.id+"/publications"} style={{textDecoration:"none",color:"white"}}>
                   <div className="row">
                     <h5 className="card-title" style={{marginLeft:"2rem", marginRight:"5rem"}} >{thread.title}</h5>
                   </div>
@@ -96,8 +99,10 @@ class ThreadListComponent extends Component {
                       <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>{thread.openDate.slice(0,10)}</p>
                     </div>
                   </div>
+                  </a>
                 </div>
-              </a>
+             
+            </React.Fragment>
         )
         }
         <br />

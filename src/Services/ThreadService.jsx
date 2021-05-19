@@ -15,6 +15,17 @@ export const ThreadService = {
         })
     },
 
+    async findById(threadId) {
+        return AuthService.getToken().then(token => {
+            return axios.get(UrlProvider.getThreadURL() + "/" + threadId, {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': '*/*'
+                }
+            }).then(res => res.data).catch(error => {return error.response.status})
+        })
+    },
+
     async findByForumNoAuth(forumId) {
         return axios.get(UrlProvider.getThreadURL() + "/findByForumNoAuth/" + forumId, {
         }).then(res => res.data).catch(error => {return error.response.status})
@@ -34,6 +45,17 @@ export const ThreadService = {
     async deleteThread(threadId) {
         return AuthService.getToken().then(token => {
             return axios.delete(UrlProvider.getThreadURL().concat(`/delete/${threadId}`), {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': '*/*'
+                }
+            }).then(res => res.data)
+        })
+    },
+
+    async deletePublicationsByThreadId(threadId) {
+        return AuthService.getToken().then(token => {
+            return axios.delete(UrlProvider.getPublicationURL().concat(`/deleteAll/${threadId}`), {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': '*/*'
