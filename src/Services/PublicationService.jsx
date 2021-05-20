@@ -14,6 +14,16 @@ export const PublicationService = {
             }).then(res => res.data).catch(error => {return error.response.status})
         })
     },
+    async findById(publicationId) {
+        return AuthService.getToken().then(token => {
+            return axios.get(UrlProvider.getPublicationURL() + "/" + publicationId, {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': '*/*'
+                }
+            }).then(res => res.data).catch(error => {return error.response.status})
+        })
+    },
 
     async findByThreadNoAuth(threadId) {
         return axios.get(UrlProvider.getPublicationURL() + "/findByThreadNoAuth/" + threadId, {
