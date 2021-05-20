@@ -29,6 +29,7 @@ class PublicationListComponent extends Component {
     this.changeTitleHandler = this.changeTitleHandler.bind(this);
     this.creatingPublication = this.creatingPublication.bind(this);
     this.publicationForm = this.publicationForm.bind(this);
+    this.deletePublication = this.deletePublication.bind(this);
   }
   handlePageClick = (e) => {
     const selectedPage = e.selected;
@@ -173,7 +174,7 @@ class PublicationListComponent extends Component {
                 //     })
                 // }else{
                   PublicationService.addPublication(publication).then((res) => {
-                    alert("Publication Submited!")
+                    alert(res)
                     window.location.reload()
                     })
                 // }
@@ -188,7 +189,19 @@ class PublicationListComponent extends Component {
     if(AuthService.isAuthenticated()){
       this.setState({createPublicationVisible:!this.state.createPublicationVisible})
     }else{
-      this.props.push("/login")
+      this.props.history.push("/login")
+    }
+  }
+
+  deletePublication(publicationId) {
+    if(AuthService.isAuthenticated()){
+      PublicationService.deletePublication(publicationId).then((res) => {
+        console.log(res)
+        alert(res)
+        window.location.reload()
+      })
+    }else{
+      this.props.history.push("/login")
     }
   }
 
@@ -226,6 +239,14 @@ class PublicationListComponent extends Component {
             <div className="container" style={{ backgroundColor: "#E9967A", border: "3px solid rgb(93, 92, 102)" }} >
               <div >
                 <h5 className="card-title" style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
+              </div>
+              <div>
+                {AuthService.isAuthenticated()?
+                AuthService.getUserData()["username"]===publication.creator.username?
+                <button className="button4" style={{float:"right"}} onClick={() => this.deletePublication(publication.id)}>Delete</button>
+                :null:null
+                }
+                
               </div>
               <div >
                 <div >

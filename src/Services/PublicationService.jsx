@@ -37,7 +37,7 @@ export const PublicationService = {
                     'Authorization': 'Bearer ' + token,
                     'Accept': '*/*'
                 }
-            }).catch(error => { return error })
+            }).then(res => res.data).catch(error => { return error })
         })
     },
 
@@ -48,7 +48,7 @@ export const PublicationService = {
                     'Authorization': 'Bearer ' + token,
                     'Accept': '*/*'
                 }
-            }).then(res => res.data)
+            }).then(res => res.data).catch(error => { return error})
         })
     },
 
