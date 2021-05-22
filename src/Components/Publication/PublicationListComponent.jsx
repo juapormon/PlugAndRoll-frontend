@@ -217,7 +217,7 @@ class PublicationListComponent extends Component {
               <button className="button5" onClick={() => this.editThread(this.props.match.params[0])}>Edit Thread</button>
               <button className="button4" onClick={() => this.deleteThread(this.props.match.params[0])}>Delete Thread</button>
               {this.state.thread.closeDate ?
-                <p>🔐🔐🔐🔐🔐</p>
+                <p>🔐🔐🔐CLOSED🔐🔐🔐</p>
                 :
                 AuthService.getUserData()["roles"].includes("ADMIN") ?
                   <button className="button3" onClick={() => this.closeThread(this.props.match.params[0])}>Close Thread</button>
