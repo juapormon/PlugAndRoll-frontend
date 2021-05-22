@@ -34,7 +34,7 @@ class HeaderComponent extends Component {
         <a href="/"><img src={logo} className="plugandroll-logo" height="50"/></a>
         <a href="/#">Cajas Rojas</a>
         <a href="/#">Juan Carlos</a>
-        <a href="/#">Foros</a>
+        <a href="/forums">Foros</a>
         <a href="/#">FAQ</a>
         <a href="/#">About us</a>
         {AuthService.isAuthenticated() ?

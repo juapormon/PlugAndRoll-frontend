@@ -1,6 +1,10 @@
 const baseUrl = "http://localhost:8080"
 const userUrl = "/users"
 const meUrl = '/me'
+const forums = '/forums'
+const threads = '/threads'
+const publications = '/publications'
+const spam = '/spam'
 
 export const UrlProvider = {
     
@@ -9,6 +13,18 @@ export const UrlProvider = {
     },
     getMeURL(){
         return baseUrl + userUrl + meUrl;
+    },
+    getForumURL(){
+        return baseUrl + forums;
+    },
+    getThreadURL(){
+        return baseUrl + threads;
+    },
+    getPublicationURL(){
+        return baseUrl + publications;
+    },
+    getSpamURL(){
+        return baseUrl + spam;
     }
     
 }

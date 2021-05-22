@@ -7,6 +7,10 @@ import HomeComponent from './Components/HomeComponent';
 import SignupComponent from './Components/Signup-Login/SignupComponent';
 import LoginComponent from './Components/Signup-Login/LoginComponent';
 import SuccessfulLoginComponent from './Components/Signup-Login/SuccessfulLoginComponent';
+import ForumListComponent from './Components/Forum/ForumListComponent';
+import ThreadListComponent from './Components/Thread/ThreadListComponent';
+import PublicationListComponent from './Components/Publication/PublicationListComponent';
+import CreateThreadComponent from './Components/Thread/CreateThreadComponent';
 
 function App() {
   return (
@@ -21,6 +25,11 @@ function App() {
               <Route path="/signup" exact component={SignupComponent}></Route>
               <Route path="/login" exact component={LoginComponent}></Route>
               <Route path="/successfulLogin" exact component={SuccessfulLoginComponent}></Route>
+              <Route path="/forums" exact component={ForumListComponent}></Route>
+              <Route path="/forums/*/threads" exact component={ThreadListComponent}></Route>
+              <Route path="/threads/*/publications" exact component={PublicationListComponent}></Route>
+              <Route path="/forums/*/createThread" exact component={CreateThreadComponent}></Route>
+              <Route path="/forums/*/editThread/*" exact component={CreateThreadComponent}></Route>
             </Switch>
           </div>
         </body>
