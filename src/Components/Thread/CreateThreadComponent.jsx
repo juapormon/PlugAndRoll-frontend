@@ -71,7 +71,7 @@ class CreateThreadComponent extends Component {
                 if(data === false){
                     if(this.props.match.params[1]){
                         ThreadService.updateThread(this.props.match.params[1], thread).then(() => {
-                            this.props.history.push('/forums/'+this.props.match.params[0] + "/threads" );
+                            this.props.history.push('/threads/'+this.props.match.params[1] +"/publications");
                         })
                     }else{
                         ThreadService.addThread(thread).then(() => {
