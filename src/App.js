@@ -24,7 +24,7 @@ function App() {
               {/* Aqui van los componentes que se creen*/}
               <Route path="/" exact component={HomeComponent}></Route>
               <Route path="/about-us" exact component={AboutUsComponent}></Route>
-              <Route path="/signup" exact component={SignupComponent}></Route>
+              <Route path="/sign-up" exact component={SignupComponent}></Route>
               <Route path="/login" exact component={LoginComponent}></Route>
               <Route path="/successfulLogin" exact component={SuccessfulLoginComponent}></Route>
             </Switch>
