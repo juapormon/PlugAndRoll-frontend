@@ -35,6 +35,7 @@ class HeaderComponent extends Component {
         <a href="/#">Cajas Rojas</a>
         <a href="/#">Juan Carlos</a>
         <a href="/forums">Foros</a>
+        <a href="/coaching">Coaching</a>
         <a href="/#">FAQ</a>
         <a href="/#">About us</a>
         {AuthService.isAuthenticated() ?

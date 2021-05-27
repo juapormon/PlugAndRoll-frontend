@@ -11,6 +11,7 @@ import ForumListComponent from './Components/Forum/ForumListComponent';
 import ThreadListComponent from './Components/Thread/ThreadListComponent';
 import PublicationListComponent from './Components/Publication/PublicationListComponent';
 import CreateThreadComponent from './Components/Thread/CreateThreadComponent';
+import OfferListComponent from './Components/Offer/OfferListComponent';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="/threads/*/publications" exact component={PublicationListComponent}></Route>
               <Route path="/forums/*/createThread" exact component={CreateThreadComponent}></Route>
               <Route path="/forums/*/editThread/*" exact component={CreateThreadComponent}></Route>
+              <Route path="/coaching" exact component={OfferListComponent}></Route>
             </Switch>
           </div>
         </body>
