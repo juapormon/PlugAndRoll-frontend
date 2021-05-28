@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { AuthService } from "../../Services/AuthService";
 import { UserService } from '../../Services/UserService';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { Col, Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 class LoginComponent extends Component {
 
@@ -81,50 +82,44 @@ class LoginComponent extends Component {
 
     render() {
         return (
-            <form>
-                <br />
-                <br />
-                <br />
-                <Form className="FormStyle">
-                    <h2 style={{ textAlign: "center" }}>Log in</h2>
-                    <br />
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Username </Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="text" className="FormInput" placeholder="Enter username" value={this.state.username} onChange={this.changeUsernameHandler} />
-                            {this.state.usernameError ? (<div className="ValidatorMessage">
+            <div  className="text-center container">
+            <div className="row justify-content-center align-items-center minh-80">
+                <form action="post" className="shadow-lg p-5 mb-4 bg-secondary">
+                    <h2>Log in</h2>
+                    <div className="form-group">               
+                        <label for="username">Username </label>
+                            <input id="username" type="text" className="form-control" placeholder="Enter username" value={this.state.username} onChange={this.changeUsernameHandler} />
+                            {this.state.usernameError ? (<div className="text-danger">
                                 {this.state.usernameError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Password</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="password" className="FormInput" placeholder="Enter password" value={this.state.password} onChange={this.changePasswordHandler} />
-                            {this.state.passwordError ? (<div className="ValidatorMessage">
-                                {this.state.passwordError}
-                            </div>) : null}
-                        </Col>
-                    </Form.Group>
-
-                    <div style={{ justifyContent: "center", display: "flex" }}>
-                        <Button type="submit" variant="outline-primary" onClick={(event) => this.loginUser(event)}>Sign in</Button>
                     </div>
-                    {this.state.submitError ? (<div className="ValidatorMessage">
+                    <div className="from-group">
+                        <label for="pasword">Password</label>
+                        <input id="pasword" type="password" className="form-control" placeholder="Enter password" value={this.state.password} onChange={this.changePasswordHandler} />
+                        {this.state.passwordError ? (<div className="text-danger">
+                            {this.state.passwordError}
+                        </div>) : null}
+                    </div>
+                    
+                    <div >
+                        <butom type="submit" className="btn btn-ligh btn-lg border m-2" variant="outline-primary" onClick={(event) => this.loginUser(event)}>Sign in</butom>
+                    </div>
+                    {this.state.submitError ? (<div className="text-danger">
                         {this.state.submitError}
                     </div>) : null}
                     
-                    <p>
-                        Not registered yet? <a href="/sign-up">sign up!</a>
-                    </p>
-                    <p>
-                        Lost password? <a href="/recoverPassword">Recover your password</a>
-                    </p>
+                    <div className="form-group">
+                        <p>
+                            Not registered yet? <a href="/sign-up">sign up!</a>
+                        </p>
+                        <p>
+                            Lost password? <a href="/recoverPassword">Recover your password</a>
+                        </p>
 
-                </Form>
-            </form>
+                    </div>
+                </form>
+                </div>
+            </div>
         );
     }
 }
