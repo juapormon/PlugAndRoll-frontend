@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { AuthService } from "../../Services/AuthService";
 import { UserService } from '../../Services/UserService';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { Col, Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 // import emailjs from 'emailjs-com';
 
 // var serviceID = "service_x4mybgl"
@@ -163,91 +164,69 @@ class SignupComponent extends Component {
 
     render() {
         return (
-            <form>
-                <br />
-                <br />
-                <br />
-                <Form className="FormStyle">
-                    <h2 style={{ textAlign: "center" }}>Sign up</h2>
-                    <br />
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Username:</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="text" className="FormInput" placeholder="Username" value={this.state.username} onChange={this.changeUsernameHandler} />
-                            {this.state.usernameError ? (<div className="ValidatorMessage">
+            <div  className="text-center container">
+                <div className="row justify-content-center align-items-center minh-85">
+                    <form className="shadow-lg p-5 mb-4 bg-secondary"> 
+                        <h2>Sign up</h2>
+                        <div className="form-group">
+                            <label>Username:</label>
+                            <input type="text" placeholder="Username" className="form-control form-control-sm w-50 mx-auto" 
+                                value={this.state.username} onChange={this.changeUsernameHandler} />
+                            {this.state.usernameError ? (<div className="text-danger">
                                 {this.state.usernameError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
 
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Email:</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="email" className="FormInput" placeholder="Enter email" value={this.state.email} onChange={this.changeEmailHandler} />
+                            <label>Email:</label>
+                            <input type="email"  placeholder="Enter email" className="form-control form-control-sm w-50 mx-auto" 
+                            value={this.state.email} onChange={this.changeEmailHandler} />
                             {this.state.emailError ? (<div className="ValidatorMessage">
                                 {this.state.emailError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Col sm="10">
-                            <Form.Control type="checkbox" defaultChecked={this.state.player} onChange={this.changePlayerHandler} />
-                            <Form.Label column sm="1">Are you a player?</Form.Label>
-                        </Col>
-                        <Col sm="10">
-                            <Form.Control type="checkbox" defaultChecked={this.state.dm} onChange={this.changeDmHandler} />
-                            <Form.Label column sm="1">Are you a DM?</Form.Label>
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Password:</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="password" className="FormInput" placeholder="Enter password" value={this.state.password} onChange={this.changePasswordHandler} />
-                            {this.state.passwordError ? (<div className="ValidatorMessage">
+                        </div>
+                        <div className="form-group">
+                            <input type="checkbox" className
+                            ="mb-2 mr-sm-2" defaultChecked={this.state.player} onChange={this.changePlayerHandler} />
+                            <label className="mb-2 mr-sm-2">Are you a player?</label>
+                            <input type="checkbox" className="mb-2 mr-sm-2" defaultChecked={this.state.dm} onChange={this.changeDmHandler} />
+                            <label className="mb-2 mr-sm-2">Are you a DM?</label>
+                        </div>
+                        <div className="form-group">
+                            <label>Password:</label>
+                            <input type="password" placeholder="Enter password" className="form-control form-control-sm w-50 mx-auto" 
+                            value={this.state.password} onChange={this.changePasswordHandler} />
+                            {this.state.passwordError ? (<div className="text-danger">
                                 {this.state.passwordError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Confirm password:</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="password" className="FormInput" placeholder="Confirm password" value={this.state.confirmPassword} onChange={this.changeConfirmPasswordHandler} />
-                            {this.state.confirmPasswordError ? (<div className="ValidatorMessage">
+                            <label>Confirm password:</label>
+                            <input type="password" placeholder="Confirm password"  className="form-control form-control-sm w-50 mx-auto" 
+                            value={this.state.confirmPassword} onChange={this.changeConfirmPasswordHandler} />
+                            {this.state.confirmPasswordError ? (<div className="text-danger">
                                 {this.state.confirmPasswordError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
+                        </div>
+                                <input type="checkbox" className="mb-2 mr-sm-2" defaultChecked={this.state.acceptedPolicy} onChange={this.changeAcceptHandler} />
+                                <label className="mb-2 mr-sm-2">I have read and accept the <a href="/termsAndConditions">Terms and Conditions</a> and the <a href="/privacyPolicy">Privacy Policy</a> of the website</label>
+                                {this.state.acceptedError ? (<div className="text-danger">
+                                    {this.state.acceptedError}
+                                </div>) : null}
 
-                    <Form.Group as={Row}>
-                        <Col sm="10">
-                            <Form.Control type="checkbox" defaultChecked={this.state.acceptedPolicy} onChange={this.changeAcceptHandler} />
-                            <Form.Label column sm="1">I have read and accept the <a href="/termsAndConditions">Terms and Conditions</a> and the <a href="/privacyPolicy">Privacy Policy</a> of the website</Form.Label>
-                            {this.state.acceptedError ? (<div className="ValidatorMessage">
-                                {this.state.acceptedError}
+                            <div style={{ justifyContent: "center", display: "flex" }}>
+                                <button type="submit" className="btn btn-ligh btn-lg border m-2" variant="outline-primary" onClick={this.saveDeveloper}>Sign up</button>
+                            </div>
+                            {this.state.submitError ? (<div className="text-danger">
+                                {this.state.submitError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
 
-                    <div style={{ justifyContent: "center", display: "flex" }}>
-                        <Button type="submit" variant="outline-primary" onClick={this.saveDeveloper}>Sign up</Button>
-                    </div>
-                    {this.state.submitError ? (<div className="ValidatorMessage">
-                        {this.state.submitError}
-                    </div>) : null}
-
-                    <p className="already-registered text-right">
-                        Already registered? <a href="/login">log in</a>
-                    </p>
-                    <p className="already-registered text-right">
-                        Lost password? <a href="/recoverPassword">Recover your password</a>
-                    </p>
-                    {this.state.spamError ? (<p className="text-danger">{this.state.spamError}</p>) : null}
-                </Form>
-            </form>
+                            <p className="mx-auto">
+                                Already registered? <a href="/login">log in</a>
+                            </p>
+                            <p className="mx-auto">
+                                Lost password? <a href="/recoverPassword">Recover your password</a>
+                            </p>
+                            {this.state.spamError ? (<p className="text-danger">{this.state.spamError}</p>) : null}
+                    </form>
+                </div>
+            </div>
         );
     }
 }

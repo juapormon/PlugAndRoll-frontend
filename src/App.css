@@ -2,6 +2,10 @@
   display: none;
 }
 
-.minh-100 {
+.minh-80 {
   height: 80vh;
+}
+
+.minh-85 {
+  height: 85vh;
 }

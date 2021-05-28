@@ -83,7 +83,7 @@ class LoginComponent extends Component {
     render() {
         return (
             <div  className="text-center container">
-            <div className="row justify-content-center align-items-center minh-100">
+            <div className="row justify-content-center align-items-center minh-80">
                 <form action="post" className="shadow-lg p-5 mb-4 bg-secondary">
                     <h2>Log in</h2>
                     <div className="form-group">               
@@ -102,7 +102,7 @@ class LoginComponent extends Component {
                     </div>
                     
                     <div >
-                        <butom type="submit" className="btn btn-ligh btn-lg" variant="outline-primary" onClick={(event) => this.loginUser(event)}>Sign in</butom>
+                        <butom type="submit" className="btn btn-ligh btn-lg border m-2" variant="outline-primary" onClick={(event) => this.loginUser(event)}>Sign in</butom>
                     </div>
                     {this.state.submitError ? (<div className="text-danger">
                         {this.state.submitError}
