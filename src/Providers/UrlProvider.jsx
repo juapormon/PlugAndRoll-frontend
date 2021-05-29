@@ -6,10 +6,14 @@ const threads = '/threads'
 const publications = '/publications'
 const spam = '/spam'
 const offer = '/offers'
+const application = '/applications'
 
 
 export const UrlProvider = {
     
+    getBaseURL(){
+        return baseUrl;
+    },
     getUserURL(){
         return baseUrl + userUrl;
     },
@@ -30,6 +34,8 @@ export const UrlProvider = {
     },
     getOfferURL(){
         return baseUrl + offer;
+    },
+    getApplicationURL(){
+        return baseUrl + application;
     }
-    
 }

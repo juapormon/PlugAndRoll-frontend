@@ -344,7 +344,7 @@ padding-right:80px;
   background-color: rgb(255, 90, 90);
   margin-bottom: 1%;
   padding: 1%;
-  font-size: 70%;
+  font-size: 50%;
 }
 
 .button4 {
@@ -352,6 +352,7 @@ padding-right:80px;
   background-color: rgb(255, 255, 255);
   margin-bottom: 1%;
   padding: 1%;
+  font-size: 50%;
 }
 
 .button3 {
@@ -359,5 +360,6 @@ padding-right:80px;
   background-color: rgb(224, 202, 0);
   margin-bottom: 1%;
   padding: 1%;
+  font-size: 50%;
 }
 

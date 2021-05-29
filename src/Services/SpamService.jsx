@@ -11,6 +11,11 @@ export const SpamService = {
     async checkPublication(publicationDTO) {
         return axios.post(UrlProvider.getSpamURL() + "/publication", publicationDTO)
             .then(res => res.data).catch(error => { return error })
+    },
+
+    async checkOffer(offer) {
+        return axios.post(UrlProvider.getSpamURL() + "/offer", offer)
+            .then(res => res.data).catch(error => { return error })
     }
 
 }

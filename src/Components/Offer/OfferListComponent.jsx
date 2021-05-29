@@ -24,7 +24,8 @@ class OfferListComponent extends Component {
       pageCount: 0, 
       pageCountDM: 0, 
       currentPage: 0,
-      currentPageDM: 0
+      currentPageDM: 0,
+      seeingMyOffers: null
     }
     this.handlePageClick = this.handlePageClick.bind(this);
     this.handlePageClickDM = this.handlePageClickDM.bind(this);
@@ -77,7 +78,8 @@ class OfferListComponent extends Component {
       this.setState({
         offers: slice,
         pageCount: Math.ceil(res.length / this.state.perPage),
-        rawOffers: res
+        rawOffers: res,
+        seeingMyOffers:false
         });
       })
       OfferService.findByType("DM").then((res) => {
@@ -91,39 +93,90 @@ class OfferListComponent extends Component {
       })
     }
   }
-  
-  applyOffer(OfferId){
-      this.props.history.push("/forums/"+ this.state.thread.forum.id + "/editThread/"+ this.state.thread.id)
+
+  applyOffer(offerId){
+    this.props.history.push("/offers/" + offerId + "/apply")
+  }
+  deleteOffer(offerId){
+    OfferService.deleteOffer(offerId).then(res => {
+      alert(res);
+      window.location.reload()
+    })
+  }
+  offerDetails(offerId){
+    this.props.history.push("/offers/" + offerId)
   }
 
-  getPLAYEROffers(){
-    return(
-    this.state.offers.map(
-      offer =>
-            <div style={{maxWidth:"80%"}}>
-            <div className="card" >
+  getPLAYEROffers() {
+    return (
+      this.state.offers.map(
+        offer =>
+          AuthService.getUserData()["username"] === offer.creator.username ?
+            <div style={{ minWidth: "85%", maxWidth: "85%" }}>
+              <div id="offerCard" className="card bg-warning" >
                 <div className="card-header">
-                <h5 >{offer.title} </h5>
+                  <h5 >{offer.title} </h5>
                 </div>
-                <div className="card-body"> 
+                <div className="card-body">
                   <div className="container">
                     <div className="row">
                       <div className="col">
-                        <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}} >Rol: {offer.coachingType}</p>
+                        <p style={{ fontSize: "1rem",}} >Rol: {offer.coachingType}</p>
                       </div>
                       <div className="col">
-                        <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem", float:"right"}} >Price: {offer.price}$</p>
+                        <p style={{ fontSize: "1rem", float: "right" }} >Price: {offer.price}$</p>
                       </div>
-                      <div className="col-1">
-                      <button className="button5" style={{float:"right"}} onClick={() => this.applyOffer(offer.id)}>Apply</button>
+                      <div className="col">
+                        <button className="button4" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteOffer(offer.id)}>Delete</button>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col">
+                        <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
+                      </div>
+                      <div className="col">
+                        <button className="button4" style={{ padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <br />
             </div>
-            <br/>
+            :
+            <div style={{ minWidth: "85%", maxWidth: "85%" }}>
+              <div id="offerCard" className="card" >
+                <div className="card-header">
+                  <h5 >{offer.title} </h5>
+                </div>
+                <div className="card-body">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col">
+                        <p style={{ fontSize: "1rem"}} >Rol: {offer.coachingType}</p>
+                      </div>
+                      <div className="col">
+                        <p style={{ fontSize: "1rem"}} >Price: {offer.price}$</p>
+                      </div>
+                      <div className="col">
+                        <button className="button5" style={{ padding:"6%", float: "right" }} onClick={() => this.applyOffer(offer.id)}>Apply</button>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col">
+                        <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
+                      </div>
+                      <div className="col">
+                        <button className="button4" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
             </div>
-    )
+
+      )
     );
   }
 
@@ -131,33 +184,104 @@ class OfferListComponent extends Component {
     return (
       this.state.offersDM.map(
         offer =>
-        <div>
-        <div style={{maxWidth:"80%"}}>
-        <div className="card" >
-            <div className="card-header">
-            <h5 >{offer.title} </h5>
-            </div>
-            <div className="card-body"> 
-              <div className="container">
-                <div className="row">
-                  <div className="col">
-                    <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}} >Rol: {offer.coachingType}</p>
-                  </div>
-                  <div className="col">
-                    <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem", float:"right"}} >Price: {offer.price}$</p>
-                  </div>
-                  <div className="col-1">
-                  <button className="button5" style={{float:"right"}} onClick={() => this.applyOffer(offer.id)}>Apply</button>
+          AuthService.getUserData()["username"] === offer.creator.username ?
+            <div style={{ minWidth: "85%", maxWidth: "85%" }}>
+              <div id="offerCard" className="card bg-warning" >
+                <div className="card-header">
+                  <h5 >{offer.title} </h5>
+                </div>
+                <div className="card-body">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col">
+                        <p style={{ fontSize: "1rem",}} >Rol: {offer.coachingType}</p>
+                      </div>
+                      <div className="col">
+                        <p style={{ fontSize: "1rem", float: "right" }} >Price: {offer.price}$</p>
+                      </div>
+                      <div className="col">
+                        <button className="button4" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteOffer(offer.id)}>Delete</button>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col">
+                        <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
+                      </div>
+                      <div className="col">
+                        <button className="button4" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+              <br />
             </div>
-        </div>
-        <br/>
-        </div>
-        </div>
-)
-);
+            :
+            <div style={{ minWidth: "85%", maxWidth: "85%" }}>
+              <div id="offerCard" className="card" >
+                <div className="card-header">
+                  <h5 >{offer.title} </h5>
+                </div>
+                <div className="card-body">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col">
+                        <p style={{ fontSize: "1rem"}} >Rol: {offer.coachingType}</p>
+                      </div>
+                      <div className="col">
+                        <p style={{ fontSize: "1rem"}} >Price: {offer.price}$</p>
+                      </div>
+                      <div className="col">
+                        <button className="button5" style={{ padding:"6%", float: "right" }} onClick={() => this.applyOffer(offer.id)}>Apply</button>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col">
+                        <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
+                      </div>
+                      <div className="col">
+                        <button className="button4" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+            </div>
+
+      )
+    );
+  }
+
+  createOffer(){
+    this.props.history.push("/offers/create")
+  }
+
+  myOffers(){
+    OfferService.findMyOffers().then(res => {
+      console.log(res )
+      var resDM = res.filter(function(event){
+        return event.coachingType == 'DM';
+      });
+      var resPLAYER = res.filter(function(event){
+        return event.coachingType == 'PLAYER';
+      });
+      var slicePLAYER = resPLAYER.slice(this.state.offset, this.state.offset + this.state.perPage)
+      var sliceDM = resDM.slice(this.state.offsetDM, this.state.offsetDM + this.state.perPageDM)
+      this.setState({
+        pageCount: Math.ceil(resPLAYER.length / this.state.perPage),
+        pageCountDM: Math.ceil(resDM.length / this.state.perPageDM),
+        offers: slicePLAYER,
+        offersDM: sliceDM,
+        rawOffers: resPLAYER,
+        rawOffersDM: resDM,
+        seeingMyOffers: true
+      })
+    })
+  }
+
+  myApplications(){
+    this.props.history.push("/myApplications")
   }
 
   paginate(){
@@ -199,8 +323,19 @@ class OfferListComponent extends Component {
   render() {
 
     return (
+      AuthService.isAuthenticated()?
       <div className="container">
       <br/>
+      <br/>
+      <br/>
+      <h2 style={{marginLeft:"30%"}}>COACHING OFFERS</h2>
+      <button  className="button5" style={{marginRight:"1%"}} onClick={() => this.createOffer()}>Create Offer</button>
+      {this.state.seeingMyOffers?
+      <button  className="button5" style={{marginRight:"1%"}} onClick={() => this.componentDidMount()}>All Offers</button>
+      :
+      <button  className="button5" style={{marginRight:"1%"}} onClick={() => this.myOffers()}>My Offers</button>
+      }
+      <button  className="button5" style={{marginRight:"1%"}} onClick={() => this.myApplications()}>My Applications</button>
       <br/>
       <div className="row">
         <div className="col">
@@ -225,7 +360,11 @@ class OfferListComponent extends Component {
         </div>
       </div>
       </div>
-    );
+      :
+      <React.Fragment>
+      {this.props.history.push("/login")}
+      </React.Fragment>
+    ); 
   }
 }
 
