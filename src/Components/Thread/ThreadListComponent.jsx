@@ -88,10 +88,10 @@ class ThreadListComponent extends Component {
               
                 <div className="container" style={{ backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
                 <a href={"/threads/"+thread.id+"/publications"} style={{textDecoration:"none",color:"white"}}>
-                  <div className="row">
+                  <div className="card-header">
                     <h5 className="card-title" style={{marginLeft:"2rem", marginRight:"5rem"}} >{thread.title}</h5>
                   </div>
-                  <div className="row">
+                  <div className="card-body row">
                     <div className="col-sm">
                       <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>{thread.rating}</p>
                     </div>

@@ -127,7 +127,7 @@ class MyApplicationsComponent extends Component {
                             {application.accepted?
                             null
                             :
-                            <button className="button4" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteApplication(application.id)}>Delete</button>
+                            <button className="button5 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteApplication(application.id)}>Delete</button>
                             }
                       </div>  
                     </div>
@@ -170,7 +170,7 @@ class MyApplicationsComponent extends Component {
                             {application.accepted?
                             null
                             :
-                            <button className="button4" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteApplication(application.id)}>Delete</button>
+                            <button className="button5 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteApplication(application.id)}>Delete</button>
                             }
                       </div>  
                     </div>

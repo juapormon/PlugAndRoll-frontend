@@ -60,6 +60,17 @@ export const ApplicationService = {
         })
     },
 
+    async acceptApplication(offerId, applicationId) {
+        return AuthService.getToken().then(token => {
+            return axios.put(UrlProvider.getOfferURL().concat(`/${offerId}/applications/${applicationId}/accept`), {}, {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': '*/*'
+                }
+            }).then(res => res.data)
+        })
+    },
+
     async rejectApplication(offerId, applicationId) {
         return AuthService.getToken().then(token => {
             return axios.delete(UrlProvider.getOfferURL().concat(`/${offerId}/applications/${applicationId}/reject`), {

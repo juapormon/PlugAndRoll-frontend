@@ -4,6 +4,8 @@ import { AuthService } from '../../Services/AuthService';
 import { PublicationService } from '../../Services/PublicationService';
 import { SpamService } from '../../Services/SpamService';
 import { ThreadService } from '../../Services/ThreadService';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 class PublicationListComponent extends Component {
 
@@ -165,19 +167,10 @@ class PublicationListComponent extends Component {
         
         SpamService.checkPublication(publicationDTO).then((data)=>{
             if(data === false){
-                // if(this.state.publicationId){
-                //     PublicationService.updatePublication(this.state.publicationId, publication).then(() => {
-                //       let newPublications = this.state.publications
-                //       let objIndex = newPublications.findIndex((obj => obj.id == this.state.publicationId));
-                //       this.newPublications[objIndex].text = publication.text
-                //       this.setState({publications: newPublications})
-                //     })
-                // }else{
                   PublicationService.addPublication(publication).then((res) => {
                     alert(res)
                     window.location.reload()
                     })
-                // }
             }else{
                 this.setState({spamError:"This form contains spam words! 😠"})
             }
@@ -227,19 +220,19 @@ class PublicationListComponent extends Component {
             : null
           : null
         }
-        <div style={{ backgroundColor: "#FAAE9D" }}>
+        <div style={{ backgroundColor: "#E7DCCF" }}>
           {this.state.createPublicationVisible?
           this.publicationForm(null)
           :null
           }
         </div>
+        <div className='container' style={{width:"100%"}} >
         {this.state.publications.map(
           publication =>
           <React.Fragment>
-            <div className="container" style={{ backgroundColor: "#E9967A", border: "3px solid rgb(93, 92, 102)" }} >
-              <div >
-                <h5 className="card-title" style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
-              </div>
+            <div className="card-header">
+            <div className="container " style={{ backgroundColor: "#E7DCCF", border: "3px solid rgb(93, 92, 102)" }} >              
+                <h5 className="card-title " style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
               <div>
                 {AuthService.isAuthenticated()?
                 AuthService.getUserData()["username"]===publication.creator.username?
@@ -248,18 +241,20 @@ class PublicationListComponent extends Component {
                 }
                 
               </div>
-              <div >
-                <div >
+              <div className="row">
+                <div className="col" >
                   <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>{publication.creator.username}</p>
                 </div>
-                <div >
+                <div className="col">
                   <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>{publication.date.slice(0, 10)}</p>
                 </div>
               </div>
             </div>
+            </div>
           </React.Fragment>
         )
         }
+        </div>
         <br />
         <div style={{ justifyContent: "center", display: "flex" }}>
           <ReactPaginate previousLabel={"prev"}

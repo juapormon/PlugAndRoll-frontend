@@ -127,7 +127,7 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem", float: "right" }} >Price: {offer.price}$</p>
                       </div>
                       <div className="col">
-                        <button className="button4" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteOffer(offer.id)}>Delete</button>
+                        <button className="button5 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteOffer(offer.id)}>Delete</button>
                       </div>
                     </div>
                     <div className="row">
@@ -135,7 +135,7 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
                       </div>
                       <div className="col">
-                        <button className="button4" style={{ padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
+                        <button className="button4 btn-block" style={{ padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
                       </div>
                     </div>
                   </div>
@@ -159,7 +159,7 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem"}} >Price: {offer.price}$</p>
                       </div>
                       <div className="col">
-                        <button className="button5" style={{ padding:"6%", float: "right" }} onClick={() => this.applyOffer(offer.id)}>Apply</button>
+                        <button className="button6 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.applyOffer(offer.id)}>Apply</button>
                       </div>
                     </div>
                     <div className="row">
@@ -167,7 +167,7 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
                       </div>
                       <div className="col">
-                        <button className="button4" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
+                        <button className="button4 btn-block" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
                       </div>
                     </div>
                   </div>
@@ -200,7 +200,7 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem", float: "right" }} >Price: {offer.price}$</p>
                       </div>
                       <div className="col">
-                        <button className="button4" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteOffer(offer.id)}>Delete</button>
+                        <button className="button5 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteOffer(offer.id)}>Delete</button>
                       </div>
                     </div>
                     <div className="row">
@@ -208,7 +208,7 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
                       </div>
                       <div className="col">
-                        <button className="button4" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
+                        <button className="button4 btn-block" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
                       </div>
                     </div>
                   </div>
@@ -232,7 +232,7 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem"}} >Price: {offer.price}$</p>
                       </div>
                       <div className="col">
-                        <button className="button5" style={{ padding:"6%", float: "right" }} onClick={() => this.applyOffer(offer.id)}>Apply</button>
+                        <button className="button6 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.applyOffer(offer.id)}>Apply</button>
                       </div>
                     </div>
                     <div className="row">
@@ -240,7 +240,7 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
                       </div>
                       <div className="col">
-                        <button className="button4" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
+                        <button className="button4 btn-block" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
                       </div>
                     </div>
                   </div>

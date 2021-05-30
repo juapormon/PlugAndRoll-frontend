@@ -56,6 +56,13 @@ class OfferComponent extends Component {
       </div>
       );
   }
+  
+  acceptApplication(applicationId){
+    ApplicationService.acceptApplication(this.state.offerId, applicationId).then(res =>{
+        alert(res)
+        window.location.reload()
+    })
+  }
 
   rejectApplication(applicationId){
       ApplicationService.rejectApplication(this.state.offerId, applicationId).then(res =>{
@@ -95,11 +102,14 @@ class OfferComponent extends Component {
                             <div className="col">
                                 <p style={{ textDecoration:"underline", fontSize: "1rem",}} >state: {application.accepted?"Accepted":"Pending"}</p>
                             </div>  
-                            <div className="col">
+                            <div className="col-md-auto">
                                 {application.accepted?
                                 null
                                 :
-                                <button className="button4" style={{ padding:"6%", float: "right" }} onClick={() => this.rejectApplication(application.id)}>Reject</button>
+                                <React.Fragment>
+                                <button className="button6 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.acceptApplication(application.id)}>Accept</button>
+                                <button className="button5 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.rejectApplication(application.id)}>Reject</button>
+                                </React.Fragment>
                                 }
                           </div>  
                         </div>
