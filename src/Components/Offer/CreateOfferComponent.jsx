@@ -13,6 +13,8 @@ class CreateOfferComponent extends Component {
             username: "",
             title: "",
             titleError: "",
+            description: "",
+            descriptionError: "",
             coachingType: "",
             cochingTypeError: "",
             coachingTypeOptions:[{label:"DM",value:"DM"},{label:"PLAYER",value:"PLAYER"}],
@@ -29,15 +31,24 @@ class CreateOfferComponent extends Component {
         this.changeTitleHandler = this.changeTitleHandler.bind(this);
         this.changeCoachingTypeHandler = this.changeCoachingTypeHandler.bind(this);
         this.changePriceHandler = this.changePriceHandler.bind(this);
+        this.changeDescriptionHandler = this.changeDescriptionHandler.bind(this);
     }
 
     validate = () => {
         let titleError = "";
         let priceError = "";
         let selectedOptionError = "";
+        let descriptionError = "";
 
         if (this.state.title.trim().length === 0) {
-            titleError = "You must type something to publish!"
+            titleError = "You must type a title to publish!"
+        }
+        if (this.state.title.length > 100){
+            titleError = "Title must have less than 100 , this one is " + this.state.title.length 
+        }
+
+        if (this.state.description.trim().length === 0) {
+            descriptionError = "You must type a description to publish!"
         }
         
         if (this.state.price.length === 0) {
@@ -57,7 +68,8 @@ class CreateOfferComponent extends Component {
         this.setState({ titleError });
         this.setState({ selectedOptionError });
         this.setState({ priceError });
-        if (titleError || selectedOptionError || priceError) {
+        this.setState({ descriptionError });
+        if (titleError || selectedOptionError || priceError || descriptionError) {
             return false;
         } else {
             return true;
@@ -72,8 +84,8 @@ class CreateOfferComponent extends Component {
         this.setState({ price: event.target.value })
     }
 
-    changePriceHandler = (event) => {
-        this.setState({ price: event.target.value })
+    changeDescriptionHandler = (event) => {
+        this.setState({ description: event.target.value })
     }
 
     changeCoachingTypeHandler = selectedOption => {
@@ -86,7 +98,7 @@ class CreateOfferComponent extends Component {
         const isValid = this.validate();
         if (isValid) {
             let offer = {
-                title: this.state.title.trim(), coachingType: this.state.coachingType, price: this.state.price, creator: null
+                title: this.state.title.trim(), description: this.state.description.trim(), coachingType: this.state.coachingType, price: this.state.price, creator: null
             }
             
             SpamService.checkOffer(offer).then((data)=>{
@@ -116,6 +128,14 @@ class CreateOfferComponent extends Component {
                             value={this.state.title} onChange={this.changeTitleHandler}></textarea>
 
                         {this.state.titleError ? (<div className="ValidatorMessage">{this.state.titleError}</div>) : null}
+                    </div>
+
+                    <div className="form-group">
+                        <label>Description: </label>
+                        <textarea placeholder="Description" name="description" type="text-box" className="form-control"
+                            value={this.state.description} onChange={this.changeDescriptionHandler}></textarea>
+
+                        {this.state.descriptionError ? (<div className="ValidatorMessage">{this.state.descriptionError}</div>) : null}
                     </div>
 
                     <div className="form-group">

@@ -64,7 +64,6 @@ class CreateApplicationComponent extends Component {
         e.preventDefault();
         const isValid = this.validate();
         if (isValid) {
-            console.log(this.state.onlyAuth)
             let application = {
                 applicationUsername: null, coachingOffer: null, date: this.state.date, accepted: null
             }

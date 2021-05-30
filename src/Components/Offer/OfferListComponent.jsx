@@ -104,7 +104,7 @@ class OfferListComponent extends Component {
     })
   }
   offerDetails(offerId){
-    this.props.history.push("/offers/" + offerId)
+    this.props.history.push("/offers/" + offerId + "/Offerdetails")
   }
 
   getPLAYEROffers() {
@@ -259,7 +259,6 @@ class OfferListComponent extends Component {
 
   myOffers(){
     OfferService.findMyOffers().then(res => {
-      console.log(res )
       var resDM = res.filter(function(event){
         return event.coachingType == 'DM';
       });

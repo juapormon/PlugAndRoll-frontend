@@ -26,6 +26,17 @@ export const OfferService = {
         })
     },
 
+    async findById(offerId) {
+        return AuthService.getToken().then(token => {
+            return axios.get(UrlProvider.getOfferURL() + "/" + offerId, {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': '*/*'
+                }
+            }).then(res => res.data).catch(error => {return error.response.status})
+        })
+    },
+
     async addOffer(offer) {
         return AuthService.getToken().then(token => {
             return axios.post(UrlProvider.getOfferURL() + "/add", offer, {

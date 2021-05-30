@@ -35,5 +35,39 @@ export const ApplicationService = {
                 }
             }).then(res => res.data).catch(error => {return error.response.status})
         })
-    }
+    },
+
+    
+    async findApplicationsAcceptedByOfferId(offerId) {
+        return AuthService.getToken().then(token => {
+            return axios.get(UrlProvider.getOfferURL() + "/" + offerId + "/applications/accepted", {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': '*/*'
+                }
+            }).then(res => res.data).catch(error => {return error.response.status})
+        })
+    },
+
+    async findApplicationsPendingByOfferId(offerId) {
+        return AuthService.getToken().then(token => {
+            return axios.get(UrlProvider.getOfferURL() + "/" + offerId + "/applications/pending", {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': '*/*'
+                }
+            }).then(res => res.data).catch(error => {return error.response.status})
+        })
+    },
+
+    async rejectApplication(offerId, applicationId) {
+        return AuthService.getToken().then(token => {
+            return axios.delete(UrlProvider.getOfferURL().concat(`/${offerId}/applications/${applicationId}/reject`), {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': '*/*'
+                }
+            }).then(res => res.data)
+        })
+    },
 }
