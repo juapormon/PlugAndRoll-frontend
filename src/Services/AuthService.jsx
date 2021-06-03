@@ -15,17 +15,16 @@ const USER_ROLE = 'ROLE_USER'
 export const AuthService = {
 
     isAuthenticated() {
-        let authenticated = (sessionStorage.getItem(AUTHENTICATED_FLAG_KEY) === "true") && (this.getUserData() !== "" && this.getUserData() !== null)
-
-        return authenticated;
+        return (sessionStorage.getItem(AUTHENTICATED_FLAG_KEY) === "true") && (this.getUserData() !== "" && this.getUserData() !== null);
     },
-
+    
     isUser() {
         return this.getRole() === USER_ROLE;
     },
 
-    async authenticate(username, password, token) {
+    authenticate(username, password, token) {
         sessionStorage.setItem(AUTHENTICATED_FLAG_KEY, 'true')
+
         let tokenData = JSON.parse(atob(token.split('.')[1]))
 
         this.setToken(token)
@@ -33,9 +32,7 @@ export const AuthService = {
         this.setCredentials(username, password)
         this.setExpirationMoment(tokenData.exp)
         this.setRole(tokenData.auth[0].authority)
-
-        this.loadUserData()
-
+        this.loadUserData(tokenData)
         this.setAuthenticationFlag('true')
 
         return this.isAuthenticated();
@@ -139,11 +136,9 @@ export const AuthService = {
         })
     },
 
-    async loadUserData() {
-        return this.getCurrentUser().then(data => {
-            this.setUserData(JSON.stringify(data))
-            this.setAuthenticationFlag('true')
-        })
+    async loadUserData(tokenData) {
+        this.setUserData(JSON.stringify(tokenData))
+        this.setAuthenticationFlag('true')
     }
 
 

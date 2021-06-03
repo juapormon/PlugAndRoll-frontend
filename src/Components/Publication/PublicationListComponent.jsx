@@ -205,14 +205,14 @@ class PublicationListComponent extends Component {
         <h2>{this.state.thread.title}</h2>
         <button className="button5" onClick={this.creatingPublication}>Publicate!</button>
         {AuthService.isAuthenticated() ?
-          AuthService.getUserData()["username"] === this.state.thread.creator.username || AuthService.getUserData()["roles"].includes("ADMIN")?
+          AuthService.getUserData().sub === this.state.thread.creator.username || AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN')?
             <React.Fragment>
               <button className="button5" onClick={() => this.editThread(this.props.match.params[0])}>Edit Thread</button>
               <button className="button4" onClick={() => this.deleteThread(this.props.match.params[0])}>Delete Thread</button>
               {this.state.thread.closeDate ?
                 <p>🔐🔐🔐CLOSED🔐🔐🔐</p>
                 :
-                AuthService.getUserData()["roles"].includes("ADMIN") ?
+                AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN') ?
                   <button className="button3" onClick={() => this.closeThread(this.props.match.params[0])}>Close Thread</button>
                   : null
               }
@@ -235,7 +235,7 @@ class PublicationListComponent extends Component {
                 <h5 className="card-title " style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
               <div>
                 {AuthService.isAuthenticated()?
-                AuthService.getUserData()["username"]===publication.creator.username?
+                AuthService.getUserData().sub === publication.creator.username?
                 <button className="button4" style={{float:"right"}} onClick={() => this.deletePublication(publication.id)}>Delete</button>
                 :null:null
                 }

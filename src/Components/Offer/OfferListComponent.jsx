@@ -111,7 +111,7 @@ class OfferListComponent extends Component {
     return (
       this.state.offers.map(
         offer =>
-          AuthService.getUserData()["username"] === offer.creator.username ?
+        AuthService.getUserData().sub === offer.creator.username ?
             <div style={{ minWidth: "85%", maxWidth: "85%" }}>
               <div id="offerCard" className="card bg-warning" >
                 <div className="card-header">
@@ -184,7 +184,7 @@ class OfferListComponent extends Component {
     return (
       this.state.offersDM.map(
         offer =>
-          AuthService.getUserData()["username"] === offer.creator.username ?
+        AuthService.getUserData().sub === offer.creator.username ?
             <div style={{ minWidth: "85%", maxWidth: "85%" }}>
               <div id="offerCard" className="card bg-warning" >
                 <div className="card-header">
