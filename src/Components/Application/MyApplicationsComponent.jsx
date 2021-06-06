@@ -101,7 +101,7 @@ class MyApplicationsComponent extends Component {
     return (
       this.state.applications.map(
         application =>
-            <div style={{ maxWidth: "85%" }}>
+            <div style={{ minWidth: "85%", maxWidth: "85%" }}>
               <div id="applicationCard" className="card text-primary" >
                 <div className="card-header">
                   <h5 >{application.coachingOffer.title} </h5>
@@ -144,7 +144,7 @@ class MyApplicationsComponent extends Component {
     return (
       this.state.applicationsDM.map(
         application =>
-            <div style={{ minWidth: "85%",maxWidth: "85%" }}>
+            <div style={{ minWidth: "85%", maxWidth: "85%" }}>
               <div id="applicationCard" className="card text-primary" >
                 <div className="card-header">
                   <h5 >{application.coachingOffer.title} </h5>
@@ -219,6 +219,10 @@ class MyApplicationsComponent extends Component {
     )
   }
 
+  goback(){
+    this.props.history.push("/coaching")
+  }
+
   render() {
 
     return (
@@ -250,6 +254,7 @@ class MyApplicationsComponent extends Component {
         <div className="row">
         {this.paginateDM()}
         </div>
+        <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
         </div>
       </div>
       </div>

@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { AuthService } from '../../Services/AuthService';
 import { ThreadService } from '../../Services/ThreadService';
 import StarRatings from 'react-star-ratings';
+import { ForumService } from '../../Services/ForumService';
 
 class ThreadListComponent extends Component {
 
@@ -14,10 +15,11 @@ class ThreadListComponent extends Component {
       threads: [],
       rawthreads: [],
       offset: 0,
-      perPage: 5,
+      perPage: 15,
       pageCount: 0, 
       currentPage: 0,
-      threadId:""
+      threadId:"",
+      forumRoles: []
     }
     this.handlePageClick = this.handlePageClick.bind(this);
     this.createThread = this.createThread.bind(this);
@@ -33,7 +35,7 @@ class ThreadListComponent extends Component {
     })
   }
   loadMoreData() {
-    const data = this.state.rawthreads;
+    const data = this.state.rawThreads;
 
     const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
     this.setState({
@@ -43,6 +45,11 @@ class ThreadListComponent extends Component {
   }
 
   componentDidMount() {
+    ForumService.findById(this.props.match.params[0]).then(res=>{
+      this.setState({
+        forumRoles: res.type
+      })
+    })
     if(AuthService.isAuthenticated()){
       ThreadService.findByForum(this.props.match.params[0]).then((res) => {
         var slice = res.slice(this.state.offset, this.state.offset + this.state.perPage)
@@ -75,11 +82,29 @@ class ThreadListComponent extends Component {
     }
   }
 
+  goback(){
+    this.props.history.push("/forums")
+  }
+
   render() {
 
     return (
       <React.Fragment>
-      <h2>Threads</h2>
+        <br/>
+        <br/>
+        <br/>
+        {console.log(this.state.forumRoles[1])}
+        {this.state.forumRoles[1]?
+            this.state.forumRoles[2]?
+              <h2>Common forum threads</h2>
+            :this.state.forumRoles[1]==="PLAYER"?
+            <h2>Players forum threads</h2>
+            :this.state.forumRoles[1]==="DM"?
+            <h2>DM forum threads</h2>
+            :null
+        :
+          <h2>Admin forum threads</h2>
+        }
       <button className="button5" onClick={this.createThread}>Create new Thread</button>
       <div className='container' style={{width:"60%", height:"5%"}} >
         {this.state.threads.map(
@@ -89,7 +114,7 @@ class ThreadListComponent extends Component {
                 <div className="container" style={{ backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
                 <a href={"/threads/"+thread.id+"/publications"} style={{textDecoration:"none",color:"white"}}>
                   <div className="card-header">
-                    <h5 className="card-title" style={{marginLeft:"2rem", marginRight:"5rem"}} >{thread.title}</h5>
+                    <h5 className="card-title" style={{marginLeft:"1rem", marginRight:"1rem"}} >{thread.title}</h5>
                   </div>
                   <div className="card-body">
                   <div className="row">
@@ -120,7 +145,8 @@ class ThreadListComponent extends Component {
 
                   </a>
                 </div>
-             
+                <br/>
+                
             </React.Fragment>
         )
         }
@@ -138,8 +164,12 @@ class ThreadListComponent extends Component {
           subContainerClassName={"pages pagination"}
           activeClassName={"active"} />
           </div>
-      </div>
+
+         <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
+        </div>
+
       </React.Fragment>
+      
     );
   }
 }

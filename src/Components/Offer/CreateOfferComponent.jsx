@@ -152,13 +152,16 @@ class CreateOfferComponent extends Component {
                     </div>
 
                     <button className="button5" variant="outline-success" onClick={this.saveOffer}>Create offer</button>
-                    
+                    <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
                 {this.state.spamError?(<p className="text-danger">{this.state.spamError}</p>):null}
             </form>
             </React.Fragment>
         )
     }
-    
+
+    goback() {
+        this.props.history.push("/coaching")  
+    }
 
     render() {
         return (

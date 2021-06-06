@@ -67,10 +67,12 @@ class ForumListComponent extends Component {
   render() {
 
     return (
-      <div>
+      <div style={{width:"50%"}}>
+        <br/>
         <br/>
         <br/>
         <h2 className="text-center" >Forums</h2>
+        <br/>
         {this.state.forums.map(
           forum =>
           <div>

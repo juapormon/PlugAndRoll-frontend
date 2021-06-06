@@ -92,6 +92,10 @@ class OfferComponent extends Component {
     })
   }
 
+  goback(){
+    this.props.history.push("/coaching")
+  }
+
   getApplications() {
     return (
       this.state.applications.length === 0 ?
@@ -188,8 +192,11 @@ class OfferComponent extends Component {
                 <button className="button5" onClick={() => this.acceptedApplications()}>Accepted</button>
                 <button className="button5" onClick={() => this.pendingApplications()}>Pending</button>
                 {this.getApplications()}
+                
               </div>
               : null}
+              
+           <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
           </React.Fragment>
           :
           this.props.history.push("/login")

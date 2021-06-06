@@ -18,7 +18,7 @@ class PublicationListComponent extends Component {
       publicationId:"",
       publicationText:"",
       offset: 0,
-      perPage: 5,
+      perPage: 20,
       pageCount: 0, 
       currentPage: 0,
       textError: "",
@@ -117,7 +117,7 @@ class PublicationListComponent extends Component {
     }
     ):null}
     <form >
-      <div className="form-group">
+      <div style={{ display: "flex", justifyContent: "center"}}  className="form-group">
         <label>Title: </label>
         <textarea placeholder="Title" name="title" type="text-box" className="form-control"
           value={this.state.title} onChange={this.changeTitleHandler}></textarea>
@@ -198,19 +198,27 @@ class PublicationListComponent extends Component {
     }
   }
 
+  goback() {
+    this.props.history.push("/forums/" + this.state.thread.forum.id + "/threads")
+  }
+
   render() {
 
     return (
-      <div>
-        <h2 style={{marginLeft:"5%", marginRight:"5%"}} >{this.state.thread.title}</h2>
-        <button style={{marginLeft:"5%"}} className="button5" onClick={this.creatingPublication}>Publicate!</button>
+      <div style={{width:"90%"}}>
+        <br/>
+        <br/>
+        <h2 style={{display: "flex", justifyContent: "center"}} >{this.state.thread.title}</h2>
+        <br/>
+        <div style={{display: "flex", justifyContent: "center"}}>
+        <button className="button5" onClick={this.creatingPublication}>Publicate!</button>
         {AuthService.isAuthenticated() ?
           AuthService.getUserData().sub === this.state.thread.creator.username || AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN')?
             <React.Fragment>
               <button className="button5" onClick={() => this.editThread(this.props.match.params[0])}>Edit Thread</button>
               <button className="button4" onClick={() => this.deleteThread(this.props.match.params[0])}>Delete Thread</button>
               {this.state.thread.closeDate ?
-                <p>🔐🔐🔐CLOSED🔐🔐🔐</p>
+                null
                 :
                 AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN') ?
                   <button className="button3" onClick={() => this.closeThread(this.props.match.params[0])}>Close Thread</button>
@@ -218,39 +226,67 @@ class PublicationListComponent extends Component {
               }
             </React.Fragment>
             : null
-          : null
+            : null
         }
-        <div style={{marginLeft:"5%", marginRight:"5%", backgroundColor: "#E7DCCF" }}>
+        </div>
+        {this.state.thread.closeDate ?
+                <p style={{display: "flex", justifyContent: "center"}}>🔐🔐🔐CLOSED🔐🔐🔐</p>
+              :null}
+        
+        <div style={{ width:"100%", marginRight:"5%", backgroundColor: "#E7DCCF" }}>
           {this.state.createPublicationVisible?
           this.publicationForm(null)
           :null
           }
+        
         </div>
-        <div className='container' style={{width:"100%"}} >
+        <div className='container'>
         {this.state.publications.map(
           publication =>
           <React.Fragment>
+            {publication.creator.username === publication.thread.creator.username?
+            <div className="card-header">
+            <div className="container " style={{ backgroundColor: "#F8E7A2", border: "3px solid rgb(93, 92, 102)" }} >              
+                <h5 className="card-title " style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
+              <div className="row">
+                <div className="col-4" >
+                  <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>creator: {publication.creator.username}</p>
+                </div>
+                <div className="col-5">
+                  <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>publicated on: {publication.date.slice(0, 10)}</p>
+                </div>
+                <div className="col" >
+                  {AuthService.isAuthenticated()?
+                  AuthService.getUserData().sub === publication.creator.username?
+                    <button className="button4" style={{ float:"right"}} onClick={() => this.deletePublication(publication.id)}>Delete</button>
+                  :null:null
+                  }
+                </div>
+                </div>
+            </div>
+            </div>            
+            :
             <div className="card-header">
             <div className="container " style={{ backgroundColor: "#E7DCCF", border: "3px solid rgb(93, 92, 102)" }} >              
                 <h5 className="card-title " style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
-              <div>
+              <div className="row">
+                <div className="col-4" >
+                  <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>creator: {publication.creator.username}</p>
+                </div>
+                <div className="col-5">
+                  <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>publicated on: {publication.date.slice(0, 10)}</p>
+                </div>
+                <div className="col" >
                 {AuthService.isAuthenticated()?
                 AuthService.getUserData().sub === publication.creator.username?
-                <button className="button4" style={{float:"right"}} onClick={() => this.deletePublication(publication.id)}>Delete</button>
+                <button className="button4" style={{ float:"right"}} onClick={() => this.deletePublication(publication.id)}>Delete</button>
                 :null:null
                 }
-                
-              </div>
-              <div className="row">
-                <div className="col" >
-                  <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>{publication.creator.username}</p>
-                </div>
-                <div className="col">
-                  <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>{publication.date.slice(0, 10)}</p>
                 </div>
               </div>
             </div>
             </div>
+            }
           </React.Fragment>
         )
         }
@@ -269,6 +305,7 @@ class PublicationListComponent extends Component {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"} />
         </div>
+        <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
       </div>
     );
   }

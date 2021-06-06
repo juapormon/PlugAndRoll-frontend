@@ -24,6 +24,7 @@ class CreateThreadComponent extends Component {
         this.changeOnlyAuthHandler = this.changeOnlyAuthHandler.bind(this);
     }
     componentDidMount(){
+        console.log(this.props)
         if(this.props.match.params[1]){
             ThreadService.findById(this.props.match.params[1]).then((res)=>{
                 this.setState({
@@ -38,6 +39,9 @@ class CreateThreadComponent extends Component {
 
         if (this.state.title.trim().length === 0) {
             titleError = "You must type something to publish!"
+        }
+        if (this.state.title.trim().length > 400) {
+            titleError = "The title must have less than 400 characters!. This one is " + this.state.title.trim().length 
         }
 
         this.setState({ titleError });
@@ -85,6 +89,15 @@ class CreateThreadComponent extends Component {
         }
     }
 
+    goback() {
+        if(this.props.match.params[1]){
+            this.props.history.push("/threads/" + this.props.match.params[1]+ "/publications")
+        }else{
+            this.props.history.push("/forums/" + this.props.match.params[0] + "/threads")
+        }
+        
+    }
+
     createForm(){
         return(
             <React.Fragment>
@@ -120,13 +133,15 @@ class CreateThreadComponent extends Component {
                     }
                 {this.state.spamError?(<p className="text-danger">{this.state.spamError}</p>):null}
             </form>
+            
+            <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
             </React.Fragment>
         )
     }
 
     render() {
         return (
-            <div>
+            <div style={{width:"50%"}}>
                 {this.createForm()}
             </div>
         );

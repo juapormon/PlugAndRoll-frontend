@@ -74,6 +74,10 @@ class CreateApplicationComponent extends Component {
         }
     }
 
+    goback(){
+        this.props.history.push("/coaching")
+    }
+
     createForm(){
         return(
             <React.Fragment>
@@ -88,8 +92,9 @@ class CreateApplicationComponent extends Component {
                     {this.state.dateError}
                     </div>) : null}
                     </div>
+                    <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
                     <button style={{float:"right"}} className="button4" variant="outline-success" onClick={this.saveApplication}>Apply</button>
-            </form>
+                    </form>
             </React.Fragment>
         )
     }
