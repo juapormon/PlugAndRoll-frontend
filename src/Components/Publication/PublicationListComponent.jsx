@@ -202,8 +202,8 @@ class PublicationListComponent extends Component {
 
     return (
       <div>
-        <h2>{this.state.thread.title}</h2>
-        <button className="button5" onClick={this.creatingPublication}>Publicate!</button>
+        <h2 style={{marginLeft:"5%", marginRight:"5%"}} >{this.state.thread.title}</h2>
+        <button style={{marginLeft:"5%"}} className="button5" onClick={this.creatingPublication}>Publicate!</button>
         {AuthService.isAuthenticated() ?
           AuthService.getUserData().sub === this.state.thread.creator.username || AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN')?
             <React.Fragment>
@@ -220,7 +220,7 @@ class PublicationListComponent extends Component {
             : null
           : null
         }
-        <div style={{ backgroundColor: "#E7DCCF" }}>
+        <div style={{marginLeft:"5%", marginRight:"5%", backgroundColor: "#E7DCCF" }}>
           {this.state.createPublicationVisible?
           this.publicationForm(null)
           :null

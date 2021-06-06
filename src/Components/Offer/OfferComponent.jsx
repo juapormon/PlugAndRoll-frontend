@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ApplicationService } from '../../Services/ApplicationService';
 import { AuthService } from '../../Services/AuthService';
 import { OfferService } from '../../Services/OfferService';
+import StarRatings from 'react-star-ratings';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
@@ -20,7 +21,7 @@ class OfferComponent extends Component {
           username: null,
           email: null,
           coachedGames: null,
-          rating: null
+          rating: 0
         }
       },
       applications: [],
@@ -56,7 +57,7 @@ class OfferComponent extends Component {
           <div className="container">
             <div className="row">
               <div className="col">
-                <p style={{ fontSize: "70%" }}>Username: {this.state.offer.creator.username}</p>
+                <p style={{ fontSize: "70%" }}>Coach: {this.state.offer.creator.username}</p>
               </div>
               <div className="col">
                 <p style={{ fontSize: "70%" }}>Coached games: {this.state.offer.creator.coachedGames}</p>
@@ -65,6 +66,10 @@ class OfferComponent extends Component {
             <div className="row">
               <div className="col">
                 <p style={{ fontSize: "70%" }}>Email: {this.state.offer.creator.email}</p>
+              </div>
+              <div className="col">
+                <StarRatings rating={this.state.offer.creator.rating} starDimension="20px"
+                        starSpacing="1px" starRatedColor="red" numberOfStars={5} name="rating" />
               </div>
             </div>
           </div>
