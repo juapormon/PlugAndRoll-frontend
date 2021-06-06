@@ -1,10 +1,8 @@
   
 import React, { Component } from 'react';
-import ForumLogo from '../../assets/comment-discussion-512.png';
 import {ForumService} from '../../Services/ForumService';
 import ReactPaginate from 'react-paginate';
 import Card from 'react-bootstrap/Card';
-import Image from 'react-bootstrap/Image'
 import { AuthService } from '../../Services/AuthService';
 
 class ForumListComponent extends Component {
@@ -75,19 +73,21 @@ class ForumListComponent extends Component {
         <h2 className="text-center" >Forums</h2>
         {this.state.forums.map(
           forum =>
-            <div>
-                <Card style={{backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
+          <div>
+                <div className="card" style={{backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
                 <div className="container">
-                <a href={"/forums/" + forum.id + "/threads"} style={{textDecoration:"none",color:"white"}}>
-                    <h5 style={{marginLeft:"2rem", marginRight:"5rem"}} >{forum.title}</h5>
-                  <Card.Body>
-                    <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>Forum for: {forum.type.join(', ')}</p>
-                  </Card.Body>
+                  <a href={"/forums/" + forum.id + "/threads"} style={{textDecoration:"none",color:"white"}}>
+                    <div className="card-header">
+                      <h5 style={{marginLeft:"2rem", marginRight:"5rem"}} >{forum.title}</h5>
+                    </div>
+                    <div className="card-body">
+                      <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>Forum for: {forum.type.join(', ')}</p>
+                    </div>
                   </a>
                 </div>
-                </Card>
+                </div>
                 <br/>
-            </div>
+          </div>
         )
         }
         <br />

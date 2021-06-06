@@ -5,9 +5,15 @@ const forums = '/forums'
 const threads = '/threads'
 const publications = '/publications'
 const spam = '/spam'
+const offer = '/offers'
+const application = '/applications'
+
 
 export const UrlProvider = {
     
+    getBaseURL(){
+        return baseUrl;
+    },
     getUserURL(){
         return baseUrl + userUrl;
     },
@@ -25,6 +31,11 @@ export const UrlProvider = {
     },
     getSpamURL(){
         return baseUrl + spam;
+    },
+    getOfferURL(){
+        return baseUrl + offer;
+    },
+    getApplicationURL(){
+        return baseUrl + application;
     }
-    
 }

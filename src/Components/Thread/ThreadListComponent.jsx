@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import { AuthService } from '../../Services/AuthService';
 import { ThreadService } from '../../Services/ThreadService';
-import { Button } from 'primereact/button';
+import StarRatings from 'react-star-ratings';
 
 class ThreadListComponent extends Component {
 
@@ -88,17 +88,36 @@ class ThreadListComponent extends Component {
               
                 <div className="container" style={{ backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
                 <a href={"/threads/"+thread.id+"/publications"} style={{textDecoration:"none",color:"white"}}>
-                  <div className="row">
+                  <div className="card-header">
                     <h5 className="card-title" style={{marginLeft:"2rem", marginRight:"5rem"}} >{thread.title}</h5>
                   </div>
+                  <div className="card-body">
                   <div className="row">
                     <div className="col-sm">
-                      <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>{thread.rating}</p>
+                      <p style={{fontSize:"1rem", marginLeft:"5%", marginRight:"5%"}}>Creator: {thread.creator.username}</p>
                     </div>
                     <div className="col-sm">
-                      <p style={{fontSize:"1rem", marginLeft:"2rem", marginRight:"5rem"}}>{thread.openDate.slice(0,10)}</p>
+                      <p style={{fontSize:"1rem", marginLeft:"5%", marginRight:"5%"}}>Opened on: {thread.openDate.slice(0,10)}</p>
                     </div>
                   </div>
+                  
+                  <div className="row">
+                    <div className="col-sm">
+                      <p style={{fontSize:"1rem", marginLeft:"5%", marginRight:"5%"}}>
+                        Rating:  <StarRatings rating={thread.rating} starDimension="20px"
+                          starSpacing="1px" starRatedColor="red" numberOfStars={5} name="rating" /> ({thread.rating})
+                      </p>
+                    </div>
+                    <div className="col-sm">
+                      {thread.closeDate?
+                      <p style={{fontSize:"1rem", marginLeft:"5%", marginRight:"5%"}}>Closed on: {thread.closeDate.slice(0,10)}</p>
+                      :
+                      null
+                      }
+                    </div>
+                  </div>
+                  </div>
+
                   </a>
                 </div>
              

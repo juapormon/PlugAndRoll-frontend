@@ -68,9 +68,10 @@ class LoginComponent extends Component {
             }
             UserService.login(loginData).then(data => {
                 if (typeof data == "string") {
-                    AuthService.authenticate(this.state.username, this.state.password, data).then(() => {
-                        this.props.history.push('/successfulLogin');
-                    })
+                    let authenticated = AuthService.authenticate(this.state.username, this.state.password, data);
+                    if (authenticated) {
+                        window.location.href = '/coaching';
+                    }
                 } else {
                     this.setState({ submitError: "Invalid credentials!" });
                 }

@@ -4,6 +4,8 @@ import { AuthService } from '../../Services/AuthService';
 import { PublicationService } from '../../Services/PublicationService';
 import { SpamService } from '../../Services/SpamService';
 import { ThreadService } from '../../Services/ThreadService';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 class PublicationListComponent extends Component {
 
@@ -165,19 +167,10 @@ class PublicationListComponent extends Component {
         
         SpamService.checkPublication(publicationDTO).then((data)=>{
             if(data === false){
-                // if(this.state.publicationId){
-                //     PublicationService.updatePublication(this.state.publicationId, publication).then(() => {
-                //       let newPublications = this.state.publications
-                //       let objIndex = newPublications.findIndex((obj => obj.id == this.state.publicationId));
-                //       this.newPublications[objIndex].text = publication.text
-                //       this.setState({publications: newPublications})
-                //     })
-                // }else{
                   PublicationService.addPublication(publication).then((res) => {
                     alert(res)
                     window.location.reload()
                     })
-                // }
             }else{
                 this.setState({spamError:"This form contains spam words! 😠"})
             }
@@ -209,17 +202,17 @@ class PublicationListComponent extends Component {
 
     return (
       <div>
-        <h2>{this.state.thread.title}</h2>
-        <button className="button5" onClick={this.creatingPublication}>Publicate!</button>
+        <h2 style={{marginLeft:"5%", marginRight:"5%"}} >{this.state.thread.title}</h2>
+        <button style={{marginLeft:"5%"}} className="button5" onClick={this.creatingPublication}>Publicate!</button>
         {AuthService.isAuthenticated() ?
-          AuthService.getUserData()["username"] === this.state.thread.creator.username || AuthService.getUserData()["roles"].includes("ADMIN")?
+          AuthService.getUserData().sub === this.state.thread.creator.username || AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN')?
             <React.Fragment>
               <button className="button5" onClick={() => this.editThread(this.props.match.params[0])}>Edit Thread</button>
               <button className="button4" onClick={() => this.deleteThread(this.props.match.params[0])}>Delete Thread</button>
               {this.state.thread.closeDate ?
                 <p>🔐🔐🔐CLOSED🔐🔐🔐</p>
                 :
-                AuthService.getUserData()["roles"].includes("ADMIN") ?
+                AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN') ?
                   <button className="button3" onClick={() => this.closeThread(this.props.match.params[0])}>Close Thread</button>
                   : null
               }
@@ -227,39 +220,41 @@ class PublicationListComponent extends Component {
             : null
           : null
         }
-        <div style={{ backgroundColor: "#FAAE9D" }}>
+        <div style={{marginLeft:"5%", marginRight:"5%", backgroundColor: "#E7DCCF" }}>
           {this.state.createPublicationVisible?
           this.publicationForm(null)
           :null
           }
         </div>
+        <div className='container' style={{width:"100%"}} >
         {this.state.publications.map(
           publication =>
           <React.Fragment>
-            <div className="container" style={{ backgroundColor: "#E9967A", border: "3px solid rgb(93, 92, 102)" }} >
-              <div >
-                <h5 className="card-title" style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
-              </div>
+            <div className="card-header">
+            <div className="container " style={{ backgroundColor: "#E7DCCF", border: "3px solid rgb(93, 92, 102)" }} >              
+                <h5 className="card-title " style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
               <div>
                 {AuthService.isAuthenticated()?
-                AuthService.getUserData()["username"]===publication.creator.username?
+                AuthService.getUserData().sub === publication.creator.username?
                 <button className="button4" style={{float:"right"}} onClick={() => this.deletePublication(publication.id)}>Delete</button>
                 :null:null
                 }
                 
               </div>
-              <div >
-                <div >
+              <div className="row">
+                <div className="col" >
                   <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>{publication.creator.username}</p>
                 </div>
-                <div >
+                <div className="col">
                   <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>{publication.date.slice(0, 10)}</p>
                 </div>
               </div>
             </div>
+            </div>
           </React.Fragment>
         )
         }
+        </div>
         <br />
         <div style={{ justifyContent: "center", display: "flex" }}>
           <ReactPaginate previousLabel={"prev"}
