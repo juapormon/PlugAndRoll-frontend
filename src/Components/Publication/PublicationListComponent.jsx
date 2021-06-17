@@ -117,7 +117,7 @@ class PublicationListComponent extends Component {
     }
     ):null}
     <form >
-      <div style={{ display: "flex", justifyContent: "center"}}  className="form-group">
+      <div style={{ display: "flex", justifyContent: "center", padding:"1%"}}  className="form-group">
         <label>Title: </label>
         <textarea placeholder="Title" name="title" type="text-box" className="form-control"
           value={this.state.title} onChange={this.changeTitleHandler}></textarea>
@@ -205,11 +205,11 @@ class PublicationListComponent extends Component {
   render() {
 
     return (
-      <div style={{width:"90%"}}>
+      <div style={{width:"100%"}}>
         <br/>
         <br/>
         <div className="card-header">
-            <h2 style={{ display: "flex", justifyContent: "center"}} >{this.state.thread.title}</h2>
+            <h2 style={{ overflow:"auto", display: "flex", justifyContent: "center"}} >{this.state.thread.title}</h2>
         </div>
         <br/>
         <div style={{display: "flex", justifyContent: "center"}}>
@@ -289,9 +289,12 @@ class PublicationListComponent extends Component {
             </div>
             </div>
             }
+            
           </React.Fragment>
         )
         }
+        
+        <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
         </div>
         <br />
         <div style={{ justifyContent: "center", display: "flex" }}>
@@ -307,7 +310,6 @@ class PublicationListComponent extends Component {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"} />
         </div>
-        <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
       </div>
     );
   }

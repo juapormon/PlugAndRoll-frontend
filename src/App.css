@@ -17,7 +17,7 @@
   background-color: rgb(255, 90, 90);
   margin-bottom: 1%;
   padding: 1%;
-  font-size: 50%;
+  font-size: 100%;
 }
 
 .button4 {
@@ -25,7 +25,7 @@
   background-color: rgb(255, 255, 255);
   margin-bottom: 1%;
   padding: 1%;
-  font-size: 50%;
+  font-size: 100%;
 }
 
 .button3 {
@@ -33,7 +33,7 @@
   background-color: rgb(224, 202, 0);
   margin-bottom: 1%;
   padding: 1%;
-  font-size: 50%;
+  font-size: 100%;
 }
 
 .button6 {
@@ -41,7 +41,7 @@
   background-color: rgb(44, 156, 9);
   margin-bottom: 1%;
   padding: 1%;
-  font-size: 50%;
+  font-size: 100%;
 }
 
 /* Pagination */

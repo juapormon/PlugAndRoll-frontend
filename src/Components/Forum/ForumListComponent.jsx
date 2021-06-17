@@ -67,11 +67,10 @@ class ForumListComponent extends Component {
   render() {
 
     return (
-      <div style={{width:"50%"}}>
+      <div className="text-center container" style={{width:"100%"}}>
         <br/>
         <br/>
-        <br/>
-        <h2 className="text-center" >Forums</h2>
+        <h2 >Forums</h2>
         <br/>
         {this.state.forums.map(
           forum =>
@@ -105,6 +104,7 @@ class ForumListComponent extends Component {
           containerClassName={"pagination"}
           subContainerClassName={"pages pagination"}
           activeClassName={"active"} />
+          
           </div>
       </div>
     );

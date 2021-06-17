@@ -46,7 +46,9 @@ class ThreadListComponent extends Component {
 
   componentDidMount() {
     ForumService.findById(this.props.match.params[0]).then(res=>{
+      console.log(res.type);
       this.setState({
+        
         forumRoles: res.type
       })
     })
@@ -90,20 +92,18 @@ class ThreadListComponent extends Component {
 
     return (
       <React.Fragment>
+        <div className="text-center container">
         <br/>
         <br/>
         <br/>
         {console.log(this.state.forumRoles[1])}
-        {this.state.forumRoles[1]?
-            this.state.forumRoles[2]?
-              <h2>Common forum threads</h2>
-            :this.state.forumRoles[1]==="PLAYER"?
+        {this.state.forumRoles.includes("DM") & this.state.forumRoles.includes("PLAYER") ?
+            <h2>Common forum threads</h2>
+            :this.state.forumRoles.includes("DM") & !this.state.forumRoles.includes("PLAYER")?
+            <h2>DMs forum threads</h2>
+            :!this.state.forumRoles.includes("DM") & this.state.forumRoles.includes("PLAYER")?
             <h2>Players forum threads</h2>
-            :this.state.forumRoles[1]==="DM"?
-            <h2>DM forum threads</h2>
-            :null
-        :
-          <h2>Admin forum threads</h2>
+            :<h2>Admin forum threads</h2>
         }
       <button className="button5" onClick={this.createThread}>Create new Thread</button>
       <div className='container' style={{width:"60%", height:"5%"}} >
@@ -114,7 +114,7 @@ class ThreadListComponent extends Component {
                 <div className="container" style={{ backgroundColor:"#E9967A",border: "3px solid rgb(93, 92, 102)"}} >
                 <a href={"/threads/"+thread.id+"/publications"} style={{textDecoration:"none",color:"white"}}>
                   <div className="card-header">
-                    <h5 className="card-title" style={{marginLeft:"1rem", marginRight:"1rem"}} >{thread.title}</h5>
+                    <h5 className="card-title" style={{overflow:"auto", marginLeft:"1rem", marginRight:"1rem"}} >{thread.title}</h5>
                   </div>
                   <div className="card-body">
                   <div className="row">
@@ -150,6 +150,8 @@ class ThreadListComponent extends Component {
             </React.Fragment>
         )
         }
+        
+        <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
         <br />
         <div style={{justifyContent:"center",display:"flex"}}>
         <ReactPaginate previousLabel={"prev"}
@@ -165,9 +167,8 @@ class ThreadListComponent extends Component {
           activeClassName={"active"} />
           </div>
 
-         <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
         </div>
-
+        </div>
       </React.Fragment>
       
     );
