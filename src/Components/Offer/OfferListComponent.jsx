@@ -115,7 +115,7 @@ class OfferListComponent extends Component {
             <div style={{ minWidth: "85%", maxWidth: "85%" }}>
               <div id="offerCard" className="card bg-warning" >
                 <div className="card-header">
-                  <h5 >{offer.title} </h5>
+                  <h5 style={{textoOverflow: "ellipsis"}} >{offer.title} </h5>
                 </div>
                 <div className="card-body">
                   <div className="container">
@@ -159,6 +159,11 @@ class OfferListComponent extends Component {
                         <p style={{ fontSize: "1rem"}} >Price: {offer.price}$</p>
                       </div>
                       <div className="col">
+                      {AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN') ?
+                        <button className="button5 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteOffer(offer.id)}>Delete</button>
+                        :
+                        null                      
+                      }
                         <button className="button6 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.applyOffer(offer.id)}>Apply</button>
                       </div>
                     </div>
@@ -231,7 +236,13 @@ class OfferListComponent extends Component {
                       <div className="col">
                         <p style={{ fontSize: "1rem"}} >Price: {offer.price}$</p>
                       </div>
+
                       <div className="col">
+                      {AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN') ?
+                        <button className="button5 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.deleteOffer(offer.id)}>Delete</button>
+                        :
+                        null                      
+                      }
                         <button className="button6 btn-block" style={{ padding:"6%", float: "right" }} onClick={() => this.applyOffer(offer.id)}>Apply</button>
                       </div>
                     </div>

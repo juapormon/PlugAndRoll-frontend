@@ -180,6 +180,7 @@ class OfferComponent extends Component {
             <div className="container">
               <br />
               <br />
+              <br />
               <h2>OFFER DETAILS:</h2>
               <br />
 

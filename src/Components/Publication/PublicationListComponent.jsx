@@ -208,7 +208,9 @@ class PublicationListComponent extends Component {
       <div style={{width:"90%"}}>
         <br/>
         <br/>
-        <h2 style={{display: "flex", justifyContent: "center"}} >{this.state.thread.title}</h2>
+        <div className="card-header">
+            <h2 style={{ display: "flex", justifyContent: "center"}} >{this.state.thread.title}</h2>
+        </div>
         <br/>
         <div style={{display: "flex", justifyContent: "center"}}>
         <button className="button5" onClick={this.creatingPublication}>Publicate!</button>
@@ -247,7 +249,7 @@ class PublicationListComponent extends Component {
             {publication.creator.username === publication.thread.creator.username?
             <div className="card-header">
             <div className="container " style={{ backgroundColor: "#F8E7A2", border: "3px solid rgb(93, 92, 102)" }} >              
-                <h5 className="card-title " style={{ marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
+                <h5 className="card-header " style={{overflow:"auto", marginLeft: "2rem", marginRight: "5rem" }} >{publication.text}</h5>
               <div className="row">
                 <div className="col-4" >
                   <p style={{ fontSize: "1rem", marginLeft: "2rem", marginRight: "5rem" }}>creator: {publication.creator.username}</p>
