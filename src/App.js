@@ -12,6 +12,15 @@ import RedBoxListComponent from './Components/RedBox/RedBoxListComponent';
 import RedBoxCreateComponent from './Components/RedBox/RedBoxCreateComponent';
 import RedBoxDetailsComponent from './Components/RedBox/RedBoxDetailsComponent';
 import RedBoxUpdateComponent from './Components/RedBox/RedBoxUpdateComponent';
+import ForumListComponent from './Components/Forum/ForumListComponent';
+import ThreadListComponent from './Components/Thread/ThreadListComponent';
+import PublicationListComponent from './Components/Publication/PublicationListComponent';
+import CreateThreadComponent from './Components/Thread/CreateThreadComponent';
+import OfferListComponent from './Components/Offer/OfferListComponent';
+import CreateApplicationComponent from './Components/Application/CreateApplicationComponent';
+import CreateOfferComponent from './Components/Offer/CreateOfferComponent';
+import MyApplicationsComponent from './Components/Application/MyApplicationsComponent';
+import OfferComponent from './Components/Offer/OfferComponent';
 
 function App() {
   return (
@@ -31,6 +40,16 @@ function App() {
               <Route path="/createRedBox" exact component={RedBoxCreateComponent}></Route>
               <Route path="/redboxDetails/:id" exact component={RedBoxDetailsComponent}></Route>
               <Route path="/redboxUpdate/:id" exact component={RedBoxUpdateComponent}></Route>
+              <Route path="/forums" exact component={ForumListComponent}></Route>
+              <Route path="/forums/*/threads" exact component={ThreadListComponent}></Route>
+              <Route path="/threads/*/publications" exact component={PublicationListComponent}></Route>
+              <Route path="/forums/*/createThread" exact component={CreateThreadComponent}></Route>
+              <Route path="/forums/*/editThread/*" exact component={CreateThreadComponent}></Route>
+              <Route path="/coaching" exact component={OfferListComponent}></Route>
+              <Route path="/offers/create" exact component={CreateOfferComponent}></Route>
+              <Route path="/offers/*/offerDetails" exact component={OfferComponent}></Route>
+              <Route path="/offers/*/apply" exact component={CreateApplicationComponent}></Route>
+              <Route path="/myApplications" exact component={MyApplicationsComponent}></Route>
             </Switch>
           </div>
         </body>
