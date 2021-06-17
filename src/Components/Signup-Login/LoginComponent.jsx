@@ -86,25 +86,29 @@ class LoginComponent extends Component {
                 <br />
                 <br />
                 <br />
-                <form className="FormStyle container">
+                <Form className="FormStyle">
                     <h2 style={{ textAlign: "center" }}>Log in</h2>
                     <br />
 
-                    <div className="form-group row">
-                        <label className="col-4">Username: </label>
-                            <input type="text" className="col-6" placeholder="Enter username" value={this.state.username} onChange={this.changeUsernameHandler} />
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">Username </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" className="FormInput" placeholder="Enter username" value={this.state.username} onChange={this.changeUsernameHandler} />
                             {this.state.usernameError ? (<div className="ValidatorMessage">
                                 {this.state.usernameError}
                             </div>) : null}
-                    </div>
+                        </Col>
+                    </Form.Group>
 
-                    <div className="form-group row">
-                        <label className="col-4">Password: </label>
-                            <input type="password" className="col-6" placeholder="Enter password" value={this.state.password} onChange={this.changePasswordHandler} />
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">Password</Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="password" className="FormInput" placeholder="Enter password" value={this.state.password} onChange={this.changePasswordHandler} />
                             {this.state.passwordError ? (<div className="ValidatorMessage">
                                 {this.state.passwordError}
                             </div>) : null}
-                    </div>
+                        </Col>
+                    </Form.Group>
 
                     <div style={{ justifyContent: "center", display: "flex" }}>
                         <Button type="submit" variant="outline-primary" onClick={(event) => this.loginUser(event)}>Sign in</Button>
@@ -120,7 +124,7 @@ class LoginComponent extends Component {
                         Lost password? <a href="/recoverPassword">Recover your password</a>
                     </p>
 
-                </form>
+                </Form>
             </form>
         );
     }

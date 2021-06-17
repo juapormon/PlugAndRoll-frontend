@@ -250,27 +250,28 @@ class RedBoxCreateComponent extends Component {
 
     render() {
         return (
-            <form style={{width:"80%", padding:"5%"}}>
-                <br/>
-                <br/>
-                <form className="FormStyle">
+            <form>
+                <Form className="FormStyle">
                     <h2 style={{ textAlign: "center" }}>Create a Red Box!</h2>
                     <h5 style={{ textAlign: "center" }}>Maximum size of the Red Box 16 MB. Larger files WIP.</h5>
                     <br />
 
-                    <div className="form-group row">
-                        <label className="col-2">Title:</label>
-                            <input type="text" className="col-8" placeholder="Title" value={this.state.title} onChange={this.changeTitleHandler} />
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">Title:</Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" className="FormInput" placeholder="Title" value={this.state.title} onChange={this.changeTitleHandler} />
                             {this.state.titleError ? (<div className="ValidatorMessage">
                                 {this.state.titleError}
                             </div>) : null}
-                    </div>
-                    <div className="form-group">
-                        <label className="row">Story: (.txt format)</label>
-                        <div className="row">
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">Story: (.txt format)</Form.Label>
+                        <Col sm="10">
                             {this.state.story !== "" ?
                                 <React.Fragment>
-                                    <label>Actual story: &nbsp;</label>
+                                    <Form.Label column sm="1">Actual story:</Form.Label>
                                     < br />
                                     <p>{atob(this.state.story.slice(0,20))}...</p>
                                 </React.Fragment>
@@ -279,16 +280,16 @@ class RedBoxCreateComponent extends Component {
                             {this.state.storyError ? (<div className="ValidatorMessage">
                                 {this.state.storyError}
                             </div>) : null}
-                        </div>
+                        </Col>
                         <Button onClick={this.eraseStoryHandler}>Erase story</Button>
-                    </div>
+                    </Form.Group>
 
-                    <div className="form-group">
-                        <label className="row">Maps: (.jpg, .jpeg or .png formats)</label>
-                        <div className="row">
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">Maps: (.jpg, .jpeg or .png formats)</Form.Label>
+                        <Col sm="10">
                             {this.state.maps[0] !== undefined ?
                                 <React.Fragment>
-                                    <label>Actual maps:&nbsp;</label>
+                                    <Form.Label column sm="1">Actual maps:</Form.Label>
                                     < br />
                                     {this.state.maps.map(map =>
                                         <Image src={"data:image/png;base64," + map} style={{ maxWidth: '200px', maxHeight: '150px' }} />
@@ -299,16 +300,16 @@ class RedBoxCreateComponent extends Component {
                             {this.state.mapsError ? (<div className="ValidatorMessage">
                                 {this.state.mapsError}
                             </div>) : null}
-                        </div>
+                        </Col>
                         <Button onClick={this.eraseMapsHandler}>Erase maps</Button>
-                    </div>
+                    </Form.Group>
 
-                    <div className="form-group">
-                        <label className="row">Music: (.mp3 or .wav formats)</label>
-                        <div className="row">
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">Music: (.mp3 or .wav formats)</Form.Label>
+                        <Col sm="10">
                             {this.state.music[0] !== undefined ?
                                 <React.Fragment>
-                                    <label>Actual music: &nbsp;</label>
+                                    <Form.Label column sm="1">Actual music:</Form.Label>
                                     < br />
                                     {this.state.music.map(music =>
                                         <audio controls>
@@ -324,16 +325,16 @@ class RedBoxCreateComponent extends Component {
                             {this.state.musicError ? (<div className="ValidatorMessage">
                                 {this.state.musicError}
                             </div>) : null}
-                        </div>
+                        </Col>
                         <Button onClick={this.eraseMusicHandler}>Erase music</Button>
-                    </div>
+                    </Form.Group>
 
-                    <div className="form-group">
-                        <label className="row">NPCs: (.jpg, .jpeg or .png formats)</label>
-                        <div className="row">
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">NPCs: (.jpg, .jpeg or .png formats)</Form.Label>
+                        <Col sm="10">
                             {this.state.npcs[0] !== undefined ?
                                 <React.Fragment>
-                                    <label>Actual NPCs:&nbsp;</label>
+                                    <Form.Label column sm="1">Actual NPCs:</Form.Label>
                                     < br />
                                     {this.state.npcs.map(npc =>
                                         <Image src={"data:image/png;base64," + npc} style={{ maxWidth: '200px', maxHeight: '150px' }} />
@@ -344,16 +345,16 @@ class RedBoxCreateComponent extends Component {
                             {this.state.npcsError ? (<div className="ValidatorMessage">
                                 {this.state.npcsError}
                             </div>) : null}
-                        </div>
+                        </Col>
                         <Button onClick={this.eraseNpcsHandler}>Erase NPCs</Button>
-                    </div>
+                    </Form.Group>
 
-                    <div className="form-group">
-                        <label className="row">PCs: (.pdf format)</label>
-                        <div className="row">
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">PCs: (.pdf format)</Form.Label>
+                        <Col sm="10">
                             {this.state.pcs[0] !== undefined ?
                                 <React.Fragment>
-                                    <label>Actual PCs:&nbsp;</label>
+                                    <Form.Label column sm="1">Actual PCs:</Form.Label>
                                     < br />
                                     {this.state.pcs.map(pc =>
                                         <Button onClick={() => window.open("data:application/pdf;base64," + pc)}>Character</Button>
@@ -364,16 +365,16 @@ class RedBoxCreateComponent extends Component {
                             {this.state.pcsError ? (<div className="ValidatorMessage">
                                 {this.state.pcsError}
                             </div>) : null}
-                            </div>
+                        </Col>
                         <Button onClick={this.erasePcsHandler}>Erase PCs</Button>
-                    </div>
+                    </Form.Group>
 
-                    <div className="form-group">
-                        <label className="row">Tokens: (.jpg, .jpeg or .png formats)</label>
-                        <div className="row">
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="1">Tokens: (.jpg, .jpeg or .png formats)</Form.Label>
+                        <Col sm="10">
                             {this.state.tokens[0] !== undefined ?
                                 <React.Fragment>
-                                    <label>Actual tokens:&nbsp;</label>
+                                    <Form.Label column sm="1">Actual tokens:</Form.Label>
                                     < br />
                                     {this.state.tokens.map(token =>
                                         <Image src={"data:image/png;base64," + token} style={{ maxWidth: '200px', maxHeight: '150px' }} />
@@ -384,15 +385,15 @@ class RedBoxCreateComponent extends Component {
                             {this.state.tokensError ? (<div className="ValidatorMessage">
                                 {this.state.tokensError}
                             </div>) : null}
-                        </div>
+                        </Col>
                         <Button onClick={this.eraseTokensHandler}>Erase tokens</Button>
-                    </div>
+                    </Form.Group>
 
                     <Button variant="outline-success" onClick={this.saveRedBox}>Add Red Box</Button>
                     {this.state.submitError ? (<div className="ValidatorMessage">
                         {this.state.submitError}
                     </div>) : null}
-                </form>
+                </Form>
             </form>
         );
     }
