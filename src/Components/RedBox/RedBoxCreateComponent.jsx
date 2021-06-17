@@ -269,7 +269,7 @@ class RedBoxCreateComponent extends Component {
                     <Form.Group as={Row}>
                         <Form.Label column sm="1">Story: (.txt format)</Form.Label>
                         <Col sm="10">
-                            {this.state.storyPreview !== "" ?
+                            {this.state.story !== "" ?
                                 <React.Fragment>
                                     <Form.Label column sm="1">Actual story:</Form.Label>
                                     < br />
@@ -287,7 +287,7 @@ class RedBoxCreateComponent extends Component {
                     <Form.Group as={Row}>
                         <Form.Label column sm="1">Maps: (.jpg, .jpeg or .png formats)</Form.Label>
                         <Col sm="10">
-                            {this.state.mapsPreview !== "" ?
+                            {this.state.maps[0] !== undefined ?
                                 <React.Fragment>
                                     <Form.Label column sm="1">Actual maps:</Form.Label>
                                     < br />
@@ -307,7 +307,7 @@ class RedBoxCreateComponent extends Component {
                     <Form.Group as={Row}>
                         <Form.Label column sm="1">Music: (.mp3 or .wav formats)</Form.Label>
                         <Col sm="10">
-                            {this.state.musicPreview !== "" ?
+                            {this.state.music[0] !== undefined ?
                                 <React.Fragment>
                                     <Form.Label column sm="1">Actual music:</Form.Label>
                                     < br />
@@ -332,7 +332,7 @@ class RedBoxCreateComponent extends Component {
                     <Form.Group as={Row}>
                         <Form.Label column sm="1">NPCs: (.jpg, .jpeg or .png formats)</Form.Label>
                         <Col sm="10">
-                            {this.state.npcsPreview !== "" ?
+                            {this.state.npcs[0] !== undefined ?
                                 <React.Fragment>
                                     <Form.Label column sm="1">Actual NPCs:</Form.Label>
                                     < br />
@@ -352,7 +352,7 @@ class RedBoxCreateComponent extends Component {
                     <Form.Group as={Row}>
                         <Form.Label column sm="1">PCs: (.pdf format)</Form.Label>
                         <Col sm="10">
-                            {this.state.pcsPreview !== "" ?
+                            {this.state.pcs[0] !== undefined ?
                                 <React.Fragment>
                                     <Form.Label column sm="1">Actual PCs:</Form.Label>
                                     < br />
@@ -372,7 +372,7 @@ class RedBoxCreateComponent extends Component {
                     <Form.Group as={Row}>
                         <Form.Label column sm="1">Tokens: (.jpg, .jpeg or .png formats)</Form.Label>
                         <Col sm="10">
-                            {this.state.tokensPreview !== "" ?
+                            {this.state.tokens[0] !== undefined ?
                                 <React.Fragment>
                                     <Form.Label column sm="1">Actual tokens:</Form.Label>
                                     < br />
