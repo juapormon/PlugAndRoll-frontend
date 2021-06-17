@@ -56,7 +56,7 @@ class RedBoxListComponent extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{width:"90%"}}>
                 {AuthService.isAuthenticated() ?
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <button className="button5" onClick={() => this.props.history.push("/createRedBox")}>Create a Red Box!</button>
