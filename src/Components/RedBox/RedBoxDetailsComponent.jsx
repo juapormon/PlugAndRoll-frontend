@@ -49,7 +49,7 @@ class RedBoxDetailsComponent extends Component {
                     tokens: data.tokens,
                     creator: data.creator
                 });
-                if (AuthService.getUserData()['id'] === this.state.creator.id)
+                if (AuthService.getUserData().sub === this.state.creator.username)
                     this.props.history.push("/redboxUpdate/" + this.state.id)
                 if (AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN'))
                     this.setState({ admin: true })
