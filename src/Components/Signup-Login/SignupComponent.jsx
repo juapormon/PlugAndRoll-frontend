@@ -24,6 +24,8 @@ class SignupComponent extends Component {
             passwordError: "",
             confirmPassword: "",
             confirmPasswordError: "",
+            acceptedPolicy: false,
+            acceptedError: "",
             submitError: ""
         }
 
@@ -34,6 +36,7 @@ class SignupComponent extends Component {
         this.changeDmHandler = this.changeDmHandler.bind(this);
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.changeConfirmPasswordHandler = this.changeConfirmPasswordHandler.bind(this);
+        this.changeAcceptHandler = this.changeAcceptHandler.bind(this);
     }
 
     componentDidMount() {
@@ -47,6 +50,7 @@ class SignupComponent extends Component {
         let emailError = "";
         let passwordError = "";
         let confirmPasswordError = "";
+        let acceptedError = "";
 
         if (this.state.username.trim().length === 0) {
             usernameError = "Username cannot be empty";
@@ -71,12 +75,16 @@ class SignupComponent extends Component {
         if (this.state.confirmPassword.length === 0) {
             confirmPasswordError = "Password confirmation cannot be empty";
         }
+        if (!this.state.acceptedPolicy) {
+            acceptedError = "You have to agree to the terms and conditions for signing up!";
+        }
 
         this.setState({ usernameError });
         this.setState({ emailError });
         this.setState({ passwordError });
         this.setState({ confirmPasswordError });
-        if (usernameError || emailError || passwordError || confirmPasswordError) {
+        this.setState({ acceptedError });
+        if (usernameError || emailError || passwordError || confirmPasswordError || acceptedError) {
             return false;
         } else {
             return true;
@@ -89,10 +97,10 @@ class SignupComponent extends Component {
     changeEmailHandler = (event) => {
         this.setState({ email: event.target.value });
     }
-    changePlayerHandler = () => {
+    changePlayerHandler = (event) => {
         this.setState({ player: !this.state.player })
     }
-    changeDmHandler = () => {
+    changeDmHandler = (event) => {
         this.setState({ dm: !this.state.dm })
     }
     changePasswordHandler = (event) => {
@@ -100,6 +108,9 @@ class SignupComponent extends Component {
     }
     changeConfirmPasswordHandler = (event) => {
         this.setState({ confirmPassword: event.target.value });
+    }
+    changeAcceptHandler = (event) => {
+        this.setState({ acceptedPolicy: !this.state.acceptedPolicy })
     }
     saveDeveloper = (event) => {
         event.preventDefault();
@@ -152,7 +163,7 @@ class SignupComponent extends Component {
 
     render() {
         return (
-            <form style={{width: "80%", padding:"5%"}}>
+            <form>
                 <br />
                 <br />
                 <br />
@@ -161,7 +172,7 @@ class SignupComponent extends Component {
                     <br />
 
                     <Form.Group as={Row}>
-                        <Form.Label column sm="30">Username:</Form.Label>
+                        <Form.Label column sm="1">Username:</Form.Label>
                         <Col sm="10">
                             <Form.Control type="text" className="FormInput" placeholder="Username" value={this.state.username} onChange={this.changeUsernameHandler} />
                             {this.state.usernameError ? (<div className="ValidatorMessage">
@@ -171,7 +182,7 @@ class SignupComponent extends Component {
                     </Form.Group>
 
                     <Form.Group as={Row}>
-                        <Form.Label column sm="30">Email:</Form.Label>
+                        <Form.Label column sm="1">Email:</Form.Label>
                         <Col sm="10">
                             <Form.Control type="email" className="FormInput" placeholder="Enter email" value={this.state.email} onChange={this.changeEmailHandler} />
                             {this.state.emailError ? (<div className="ValidatorMessage">
@@ -183,16 +194,16 @@ class SignupComponent extends Component {
                     <Form.Group as={Row}>
                         <Col sm="10">
                             <Form.Control type="checkbox" defaultChecked={this.state.player} onChange={this.changePlayerHandler} />
-                            <Form.Label column sm="30">Are you a player?</Form.Label>
+                            <Form.Label column sm="1">Are you a player?</Form.Label>
                         </Col>
                         <Col sm="10">
                             <Form.Control type="checkbox" defaultChecked={this.state.dm} onChange={this.changeDmHandler} />
-                            <Form.Label column sm="30">Are you a DM?</Form.Label>
+                            <Form.Label column sm="1">Are you a DM?</Form.Label>
                         </Col>
                     </Form.Group>
 
                     <Form.Group as={Row}>
-                        <Form.Label column sm="30">Password:</Form.Label>
+                        <Form.Label column sm="1">Password:</Form.Label>
                         <Col sm="10">
                             <Form.Control type="password" className="FormInput" placeholder="Enter password" value={this.state.password} onChange={this.changePasswordHandler} />
                             {this.state.passwordError ? (<div className="ValidatorMessage">
@@ -202,11 +213,21 @@ class SignupComponent extends Component {
                     </Form.Group>
 
                     <Form.Group as={Row}>
-                        <Form.Label column sm="30">Confirm password:</Form.Label>
+                        <Form.Label column sm="1">Confirm password:</Form.Label>
                         <Col sm="10">
                             <Form.Control type="password" className="FormInput" placeholder="Confirm password" value={this.state.confirmPassword} onChange={this.changeConfirmPasswordHandler} />
                             {this.state.confirmPasswordError ? (<div className="ValidatorMessage">
                                 {this.state.confirmPasswordError}
+                            </div>) : null}
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row}>
+                        <Col sm="10">
+                            <Form.Control type="checkbox" defaultChecked={this.state.acceptedPolicy} onChange={this.changeAcceptHandler} />
+                            <Form.Label column sm="1">I have read and accept the <a href="/termsAndConditions">Terms and Conditions</a> and the <a href="/privacyPolicy">Privacy Policy</a> of the website</Form.Label>
+                            {this.state.acceptedError ? (<div className="ValidatorMessage">
+                                {this.state.acceptedError}
                             </div>) : null}
                         </Col>
                     </Form.Group>

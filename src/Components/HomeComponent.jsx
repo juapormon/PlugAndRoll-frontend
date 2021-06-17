@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import initialImage from '../assets/Lost-mines-of-phandelver-dungeons-and-dragons-5E.jpg';
+import cajaroja from '../assets/cajaroja.jpg';
 
 class HomeComponent extends Component {
 
@@ -14,7 +14,7 @@ class HomeComponent extends Component {
         return (
             <div>
 
-            <img src={initialImage}  width="100%"/>
+            <img src={cajaroja}  width="400" height="800"/>
 
             </div>
         );

@@ -305,7 +305,7 @@ padding-right:80px;
 
 /* Add a dark background on topnav links and the dropdown button on hover */
 .topnav a:hover, .dropdown:hover .dropbtn {
-  background-color: #000000;
+  background-color: #f8f3e9;
   color: #d83f2d;
 }
 
