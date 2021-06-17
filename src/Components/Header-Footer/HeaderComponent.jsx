@@ -67,7 +67,6 @@ class HeaderComponent extends Component {
                   <li className="nav-item-float-right"><a href="/login" className="nav-link">Login</a></li>
                 </React.Fragment>
               }
-              <a href="#!" className="icon" onClick={this.showElements}>&#9776;</a>
             </ul>
           </div>
         </nav>

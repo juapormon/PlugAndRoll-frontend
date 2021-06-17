@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { AuthService } from '../../Services/AuthService';
 import { RedBoxService } from '../../Services/RedBoxService';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { Col, Row } from 'react-bootstrap';
-import Image from 'react-bootstrap/Image';
 
 class RedBoxCreateComponent extends Component {
 
@@ -250,154 +246,9 @@ class RedBoxCreateComponent extends Component {
 
     render() {
         return (
-            // <form>
-            //     <Form className="FormStyle">
-            //         <h2 style={{ textAlign: "center" }}>Create a Red Box!</h2>
-            //         <h5 style={{ textAlign: "center" }}>Maximum size of the Red Box 16 MB. Larger files WIP.</h5>
-            //         <br />
-
-            //         <Form.Group as={Row}>
-            //             <Form.Label column sm="1">Title:</Form.Label>
-            //             <Col sm="10">
-            //                 <Form.Control type="text" className="FormInput" placeholder="Title" value={this.state.title} onChange={this.changeTitleHandler} />
-            //                 {this.state.titleError ? (<div className="ValidatorMessage">
-            //                     {this.state.titleError}
-            //                 </div>) : null}
-            //             </Col>
-            //         </Form.Group>
-
-            //         <Form.Group as={Row}>
-            //             <Form.Label column sm="1">Story: (.txt format)</Form.Label>
-            //             <Col sm="10">
-            //                 {this.state.story !== "" ?
-            //                     <React.Fragment>
-            //                         <Form.Label column sm="1">Actual story:</Form.Label>
-            //                         < br />
-            //                         <p>{atob(this.state.story.slice(0,20))}...</p>
-            //                     </React.Fragment>
-            //                 : null}
-            //                 <Form.Control type="file" accept=".txt" className="FormInput" placeholder="Story" value={this.state.storyPreview} onChange={this.changeStoryHandler} />
-            //                 {this.state.storyError ? (<div className="ValidatorMessage">
-            //                     {this.state.storyError}
-            //                 </div>) : null}
-            //             </Col>
-            //             <Button onClick={this.eraseStoryHandler}>Erase story</Button>
-            //         </Form.Group>
-
-            //         <Form.Group as={Row}>
-            //             <Form.Label column sm="1">Maps: (.jpg, .jpeg or .png formats)</Form.Label>
-            //             <Col sm="10">
-            //                 {this.state.maps[0] !== undefined ?
-            //                     <React.Fragment>
-            //                         <Form.Label column sm="1">Actual maps:</Form.Label>
-            //                         < br />
-            //                         {this.state.maps.map(map =>
-            //                             <Image src={"data:image/png;base64," + map} style={{ maxWidth: '200px', maxHeight: '150px' }} />
-            //                         )}
-            //                     </React.Fragment>
-            //                     : null}
-            //                 <Form.Control type="file" accept=".jpg, .jpeg, .png" className="FormInput" placeholder="Maps" value={this.state.mapsPreview} onChange={this.changeMapsHandler} />
-            //                 {this.state.mapsError ? (<div className="ValidatorMessage">
-            //                     {this.state.mapsError}
-            //                 </div>) : null}
-            //             </Col>
-            //             <Button onClick={this.eraseMapsHandler}>Erase maps</Button>
-            //         </Form.Group>
-
-            //         <Form.Group as={Row}>
-            //             <Form.Label column sm="1">Music: (.mp3 or .wav formats)</Form.Label>
-            //             <Col sm="10">
-            //                 {this.state.music[0] !== undefined ?
-            //                     <React.Fragment>
-            //                         <Form.Label column sm="1">Actual music:</Form.Label>
-            //                         < br />
-            //                         {this.state.music.map(music =>
-            //                             <audio controls>
-            //                                 <source src={"data:audio/mp3;base64," + music} type="audio/ogg" />
-            //                                 <source src={"data:audio/mp3;base64," + music} type="audio/mpeg" />
-            //                                 <source src={"data:audio/mp3;base64," + music} type="audio/mp3" />
-            //                                 Your browser does not support the audio element.
-            //                             </audio>
-            //                         )}
-            //                     </React.Fragment>
-            //                     : null}
-            //                 <Form.Control type="file" accept=".mp3, .wav" className="FormInput" placeholder="Music" value={this.state.musicPreview} onChange={this.changeMusicHandler} />
-            //                 {this.state.musicError ? (<div className="ValidatorMessage">
-            //                     {this.state.musicError}
-            //                 </div>) : null}
-            //             </Col>
-            //             <Button onClick={this.eraseMusicHandler}>Erase music</Button>
-            //         </Form.Group>
-
-            //         <Form.Group as={Row}>
-            //             <Form.Label column sm="1">NPCs: (.jpg, .jpeg or .png formats)</Form.Label>
-            //             <Col sm="10">
-            //                 {this.state.npcs[0] !== undefined ?
-            //                     <React.Fragment>
-            //                         <Form.Label column sm="1">Actual NPCs:</Form.Label>
-            //                         < br />
-            //                         {this.state.npcs.map(npc =>
-            //                             <Image src={"data:image/png;base64," + npc} style={{ maxWidth: '200px', maxHeight: '150px' }} />
-            //                         )}
-            //                     </React.Fragment>
-            //                     : null}
-            //                 <Form.Control type="file" accept=".jpg, .jpeg, .png" className="FormInput" placeholder="NPCs" value={this.state.npcsPreview} onChange={this.changeNpcsHandler} />
-            //                 {this.state.npcsError ? (<div className="ValidatorMessage">
-            //                     {this.state.npcsError}
-            //                 </div>) : null}
-            //             </Col>
-            //             <Button onClick={this.eraseNpcsHandler}>Erase NPCs</Button>
-            //         </Form.Group>
-
-            //         <Form.Group as={Row}>
-            //             <Form.Label column sm="1">PCs: (.pdf format)</Form.Label>
-            //             <Col sm="10">
-            //                 {this.state.pcs[0] !== undefined ?
-            //                     <React.Fragment>
-            //                         <Form.Label column sm="1">Actual PCs:</Form.Label>
-            //                         < br />
-            //                         {this.state.pcs.map(pc =>
-            //                             <Button onClick={() => window.open("data:application/pdf;base64," + pc)}>Character</Button>
-            //                         )}
-            //                     </React.Fragment>
-            //                     : null}
-            //                 <Form.Control type="file" accept=".pdf" className="FormInput" placeholder="PCs" value={this.state.pcsPreview} onChange={this.changePcsHandler} />
-            //                 {this.state.pcsError ? (<div className="ValidatorMessage">
-            //                     {this.state.pcsError}
-            //                 </div>) : null}
-            //             </Col>
-            //             <Button onClick={this.erasePcsHandler}>Erase PCs</Button>
-            //         </Form.Group>
-
-            //         <Form.Group as={Row}>
-            //             <Form.Label column sm="1">Tokens: (.jpg, .jpeg or .png formats)</Form.Label>
-            //             <Col sm="10">
-            //                 {this.state.tokens[0] !== undefined ?
-            //                     <React.Fragment>
-            //                         <Form.Label column sm="1">Actual tokens:</Form.Label>
-            //                         < br />
-            //                         {this.state.tokens.map(token =>
-            //                             <Image src={"data:image/png;base64," + token} style={{ maxWidth: '200px', maxHeight: '150px' }} />
-            //                         )}
-            //                     </React.Fragment>
-            //                     : null}
-            //                 <Form.Control type="file" accept=".jpg, .jpeg, .png" className="FormInput" placeholder="Tokens" value={this.state.tokensPreview} onChange={this.changeTokensHandler} />
-            //                 {this.state.tokensError ? (<div className="ValidatorMessage">
-            //                     {this.state.tokensError}
-            //                 </div>) : null}
-            //             </Col>
-            //             <Button onClick={this.eraseTokensHandler}>Erase tokens</Button>
-            //         </Form.Group>
-
-            //         <Button variant="outline-success" onClick={this.saveRedBox}>Add Red Box</Button>
-            //         {this.state.submitError ? (<div className="ValidatorMessage">
-            //             {this.state.submitError}
-            //         </div>) : null}
-            //     </Form>
-            // </form>
             <div className="text-center container">
-                <div className="row justify-content-center align-items-center minh-80">
-                    <form action="post" className="shadow-lg p-5 mb-4 bg-secondary">
+                <div className="row justify-content-center align-items-center">
+                    <form className="shadow-lg p-5 bg-secondary">
                         <h2>Create a Red Box!</h2>
                         <h5>Maximum size of the Red Box is 16 MB. Larger files WIP.</h5>
                         <br />
@@ -418,6 +269,7 @@ class RedBoxCreateComponent extends Component {
                                     <label>Actual story:</label>
                                     < br />
                                     <p>{atob(this.state.story.slice(0, 20))}...</p>
+                                    <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={this.eraseStoryHandler}>Erase story</button>
                                 </React.Fragment>
                                 : null}
                             <input type="file" accept=".txt" className="form-control" placeholder="Story" value={this.state.storyPreview} onChange={this.changeStoryHandler} />
@@ -436,6 +288,8 @@ class RedBoxCreateComponent extends Component {
                                     {this.state.maps.map(map =>
                                         <img src={"data:image/png;base64," + map} style={{ maxWidth: '200px', maxHeight: '150px' }} />
                                     )}
+                                    < br />
+                                    <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={this.eraseMapsHandler}>Erase maps</button>
                                 </React.Fragment>
                                 : null}
                             <input type="file" accept=".jpg, .jpeg, .png" className="form-control" placeholder="Maps" value={this.state.mapsPreview} onChange={this.changeMapsHandler} />
@@ -459,6 +313,8 @@ class RedBoxCreateComponent extends Component {
                                             Your browser does not support the audio element.
                                         </audio>
                                     )}
+                                    < br />
+                                    <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={this.eraseMusicHandler}>Erase music</button>
                                 </React.Fragment>
                                 : null}
                             <input type="file" accept=".mp3, .wav" className="form-control" placeholder="Music" value={this.state.musicPreview} onChange={this.changeMusicHandler} />
@@ -477,6 +333,8 @@ class RedBoxCreateComponent extends Component {
                                     {this.state.npcs.map(npc =>
                                         <img src={"data:image/png;base64," + npc} style={{ maxWidth: '200px', maxHeight: '150px' }} />
                                     )}
+                                    < br />
+                                    <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={this.eraseNpcsHandler}>Erase NPCs</button>
                                 </React.Fragment>
                                 : null}
                             <input type="file" accept=".jpg, .jpeg, .png" className="form-control" placeholder="NPCs" value={this.state.npcPreview} onChange={this.changeNpcsHandler} />
@@ -485,12 +343,55 @@ class RedBoxCreateComponent extends Component {
                             </div>) : null}
                         </div>
 
-                        <div >
-                            <butom type="submit" className="btn btn-ligh btn-lg border m-2" variant="outline-primary" onClick={this.saveRedBox}>Add Red Box!</butom>
+                        <div className="form-group">
+                            <label for="pcs">PCs: (.pdf format)</label>
+                            {this.state.pcs[0] !== undefined ?
+                                <React.Fragment>
+                                    <br />
+                                    <label>Actual PCs:</label>
+                                    < br />
+                                    {this.state.pcs.map(pc =>
+                                        <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={(e) => {
+                                            e.preventDefault();
+                                            window.open("data:application/pdf;base64," + pc);
+                                        }}>Character</button>
+                                    )}
+                                    < br />
+                                    <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={this.erasePcsHandler}>Erase PCs</button>
+                                </React.Fragment>
+                                : null}
+                            <input type="file" accept=".pdf" className="form-control" placeholder="PCs" value={this.state.pcPreview} onChange={this.changePcsHandler} />
+                            {this.state.pcsError ? (<div className="text-danger">
+                                {this.state.pcsError}
+                            </div>) : null}
                         </div>
-                        {this.state.submitError ? (<div className="text-danger">
-                            {this.state.submitError}
-                        </div>) : null}
+
+                        <div className="form-group">
+                            <label for="tokens">Tokens: (.jpg, .jpeg or .png formats)</label>
+                            {this.state.tokens[0] !== undefined ?
+                                <React.Fragment>
+                                    <br />
+                                    <label>Actual tokens:</label>
+                                    < br />
+                                    {this.state.tokens.map(token =>
+                                        <img src={"data:image/png;base64," + token} style={{ maxWidth: '200px', maxHeight: '150px' }} />
+                                    )}
+                                    < br />
+                                    <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={this.eraseTokensHandler}>Erase tokens</button>
+                                </React.Fragment>
+                                : null}
+                            <input type="file" accept=".jpg, .jpeg, .png" className="form-control" placeholder="Tokens" value={this.state.tokensPreview} onChange={this.changeTokensHandler} />
+                            {this.state.tokensError ? (<div className="text-danger">
+                                {this.state.tokensError}
+                            </div>) : null}
+                        </div>
+
+                        <div >
+                            <button type="submit" className="btn btn-ligh btn-lg border m-2" variant="outline-primary" onClick={this.saveRedBox}>Add Red Box!</button>
+                            {this.state.submitError ? (<div className="text-danger">
+                                {this.state.submitError}
+                            </div>) : null}
+                        </div>
                     </form>
                 </div>
             </div>

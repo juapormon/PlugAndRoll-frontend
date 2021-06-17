@@ -54,11 +54,11 @@ class RedBoxListComponent extends Component {
             <div className="text-center container">
                 <div className="justify-content-center align-items-center minh-80">
                     {AuthService.isAuthenticated() ?
-                        <div className="row justify-content-center align-items-center  shadow-lg p-5 mb-4 bg-secondary">
+                        <div className="row justify-content-center align-items-center shadow-lg p-5 mb-4 bg-secondary">
                             <button className="btn btn-ligh btn-lg border m-2" onClick={() => this.props.history.push("/createRedBox")}>Create a Red Box!</button>
                         </div> : null}
                     {this.state.redBoxes.map(redBox =>
-                        <div className="row card shadow-lg p-5 mb-4 bg-secondary">
+                        <div className="row card shadow-lg p-5 mb-1 bg-secondary">
                             <a href={"/redboxDetails/" + redBox.id} style={{ textDecoration: "none", color: "white" }}>
                                 <div className="card-header">
                                     <h5 className="card-title" style={{ marginLeft: "1rem", marginRight: "1rem" }}>RedBox title: {redBox.title}</h5>

@@ -13,10 +13,10 @@ class FooterComponent extends Component {
     }
     render() {
         return (
-            <div className="bg-secondary flex-bottom mb-0 row justify-content-center align-items-center border border-right-0 border-bottom-0 border-left-0 border-dark">
+            <div className="bg-secondary row justify-content-center align-items-center border border-right-0 border-bottom-0 border-left-0 border-dark">
                 <footer>
                     <span>All rights reserved</span>
-                    <p><span> Powered with:
+                    <p><span>Powered with:
                    <a href="https://spring.io"><img src={springLogo} style={{ marginLeft: "5px" }} width="35" height="35" /></a> and <a href="https://es.reactjs.org"><img src={reactLogo} width="37" height="37" /></a>
                     </span></p>
                 </footer>
