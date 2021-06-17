@@ -32,11 +32,12 @@ class HeaderComponent extends Component {
     return (
       <div className="topnav" id="myTopnav">
         <a href="/"><img src={logo} className="plugandroll-logo" height="50"/></a>
-        <a href="/#">Cajas Rojas</a>
+        <a href="/redbox">Cajas Rojas</a>
         <a href="/#">Juan Carlos</a>
         <a href="/#">Foros</a>
         <a href="/#">FAQ</a>
         <a href="/#">About us</a>
+        <a href="/guides">Guides</a>
         {AuthService.isAuthenticated() ?
           <React.Fragment>
             <a href="/" style={{ float: "right", backgroundColor: "#cf0000" }} onClick={this.logout}>Logout</a>

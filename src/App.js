@@ -7,6 +7,11 @@ import HomeComponent from './Components/HomeComponent';
 import SignupComponent from './Components/Signup-Login/SignupComponent';
 import LoginComponent from './Components/Signup-Login/LoginComponent';
 import SuccessfulLoginComponent from './Components/Signup-Login/SuccessfulLoginComponent';
+import GuidesComponent from './Components/StarterGuides/GuidesComponent';
+import RedBoxListComponent from './Components/RedBox/RedBoxListComponent';
+import RedBoxCreateComponent from './Components/RedBox/RedBoxCreateComponent';
+import RedBoxDetailsComponent from './Components/RedBox/RedBoxDetailsComponent';
+import RedBoxUpdateComponent from './Components/RedBox/RedBoxUpdateComponent';
 
 function App() {
   return (
@@ -21,6 +26,11 @@ function App() {
               <Route path="/signup" exact component={SignupComponent}></Route>
               <Route path="/login" exact component={LoginComponent}></Route>
               <Route path="/successfulLogin" exact component={SuccessfulLoginComponent}></Route>
+              <Route path="/guides" exact component={GuidesComponent}></Route>
+              <Route path="/redbox" exact component={RedBoxListComponent}></Route>
+              <Route path="/createRedBox" exact component={RedBoxCreateComponent}></Route>
+              <Route path="/redboxDetails/:id" exact component={RedBoxDetailsComponent}></Route>
+              <Route path="/redboxUpdate/:id" exact component={RedBoxUpdateComponent}></Route>
             </Switch>
           </div>
         </body>
