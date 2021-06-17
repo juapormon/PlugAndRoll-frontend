@@ -70,7 +70,7 @@ class LoginComponent extends Component {
                 if (typeof data == "string") {
                     let authenticated = AuthService.authenticate(this.state.username, this.state.password, data);
                     if (authenticated) {
-                        window.location.href = '/coaching';
+                        window.location.href = '/';
                     }
                 } else {
                     this.setState({ submitError: "Invalid credentials!" });

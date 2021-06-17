@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../../assets/logomejorado.png'
+import logo from '../../assets/Plug&Roll-WhiteLetters.png'
 import '../../App.css';
 import { AuthService } from '../../Services/AuthService';
 
@@ -31,13 +31,10 @@ class HeaderComponent extends Component {
   render() {
     return (
       <div className="topnav" id="myTopnav">
-        <a href="/"><img src={logo} className="plugandroll-logo" height="50"/></a>
+        <a href="/"><img src={logo} className="plugandroll-logo" height="25"/></a>
         <a href="/redbox">Cajas Rojas</a>
-        <a href="/#">Juan Carlos</a>
         <a href="/forums">Foros</a>
         <a href="/coaching">Coaching</a>
-        <a href="/#">FAQ</a>
-        <a href="/#">About us</a>
         <a href="/guides">Guides</a>
         {AuthService.isAuthenticated() ?
           <React.Fragment>
