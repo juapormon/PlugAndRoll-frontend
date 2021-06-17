@@ -132,7 +132,7 @@ class OfferListComponent extends Component {
                     </div>
                     <div className="row">
                       <div className="col">
-                        <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
+                        <p style={{ fontSize: "1rem",}} >Coach: {offer.creator.username}</p>
                       </div>
                       <div className="col">
                         <button className="button4 btn-block" style={{ padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
@@ -169,7 +169,7 @@ class OfferListComponent extends Component {
                     </div>
                     <div className="row">
                       <div className="col">
-                        <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
+                        <p style={{ fontSize: "1rem",}} >Coach: {offer.creator.username}</p>
                       </div>
                       <div className="col">
                         <button className="button4 btn-block" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
@@ -210,7 +210,7 @@ class OfferListComponent extends Component {
                     </div>
                     <div className="row">
                       <div className="col">
-                        <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
+                        <p style={{ fontSize: "1rem",}} >Coach: {offer.creator.username}</p>
                       </div>
                       <div className="col">
                         <button className="button4 btn-block" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
@@ -248,7 +248,7 @@ class OfferListComponent extends Component {
                     </div>
                     <div className="row">
                       <div className="col">
-                        <p style={{ fontSize: "1rem",}} >Creator: {offer.creator.username}</p>
+                        <p style={{ fontSize: "1rem",}} >Coach: {offer.creator.username}</p>
                       </div>
                       <div className="col">
                         <button className="button4 btn-block" style={{padding:"3%", float: "right" }} onClick={() => this.offerDetails(offer.id)}>Details</button>
