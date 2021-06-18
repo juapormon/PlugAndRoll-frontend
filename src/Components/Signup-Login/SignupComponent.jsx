@@ -82,9 +82,11 @@ class SignupComponent extends Component {
 
         this.setState({ usernameError });
         this.setState({ emailError });
+        this.setState({ playerError });
+        this.setState({ dmError });
         this.setState({ passwordError });
         this.setState({ confirmPasswordError });
-        if (usernameError || emailError || passwordError || confirmPasswordError) {
+        if (usernameError || emailError || playerError || dmError || passwordError || confirmPasswordError) {
             return false;
         } else {
             return true;
