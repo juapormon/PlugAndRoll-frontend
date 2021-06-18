@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../../assets/Plug&Roll-RedLettersBlackBackground.png'
+import logo from '../../assets/Plug&Roll-RedLetters.png'
 import '../../App.css';
 import { AuthService } from '../../Services/AuthService';
 

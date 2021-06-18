@@ -19,13 +19,13 @@ class SignupComponent extends Component {
             email: "",
             emailError: "",
             player: false,
+            playerError: "",
             dm: false,
+            dmError: "",
             password: "",
             passwordError: "",
             confirmPassword: "",
             confirmPasswordError: "",
-            acceptedPolicy: false,
-            acceptedError: "",
             submitError: ""
         }
 
@@ -36,7 +36,6 @@ class SignupComponent extends Component {
         this.changeDmHandler = this.changeDmHandler.bind(this);
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.changeConfirmPasswordHandler = this.changeConfirmPasswordHandler.bind(this);
-        this.changeAcceptHandler = this.changeAcceptHandler.bind(this);
     }
 
     componentDidMount() {
@@ -48,9 +47,10 @@ class SignupComponent extends Component {
     validate = () => {
         let usernameError = "";
         let emailError = "";
+        let playerError = "";
+        let dmError = "";
         let passwordError = "";
         let confirmPasswordError = "";
-        let acceptedError = "";
 
         if (this.state.username.trim().length === 0) {
             usernameError = "Username cannot be empty";
@@ -61,6 +61,10 @@ class SignupComponent extends Component {
         }
         if (this.state.email.length === 0) {
             emailError = "Email cannot be empty";
+        }
+        if (!this.state.player && !this.state.dm) {
+            playerError = "You need to choose a role!";
+            dmError = "You need to choose a role!";
         }
         var passwordPattern = new RegExp(/(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[a-zA-Z0-9!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}/)
         if (!passwordPattern.test(this.state.password)) {
@@ -75,16 +79,12 @@ class SignupComponent extends Component {
         if (this.state.confirmPassword.length === 0) {
             confirmPasswordError = "Password confirmation cannot be empty";
         }
-        if (!this.state.acceptedPolicy) {
-            acceptedError = "You have to agree to the terms and conditions for signing up!";
-        }
 
         this.setState({ usernameError });
         this.setState({ emailError });
         this.setState({ passwordError });
         this.setState({ confirmPasswordError });
-        this.setState({ acceptedError });
-        if (usernameError || emailError || passwordError || confirmPasswordError || acceptedError) {
+        if (usernameError || emailError || passwordError || confirmPasswordError) {
             return false;
         } else {
             return true;
@@ -97,10 +97,10 @@ class SignupComponent extends Component {
     changeEmailHandler = (event) => {
         this.setState({ email: event.target.value });
     }
-    changePlayerHandler = (event) => {
+    changePlayerHandler = () => {
         this.setState({ player: !this.state.player })
     }
-    changeDmHandler = (event) => {
+    changeDmHandler = () => {
         this.setState({ dm: !this.state.dm })
     }
     changePasswordHandler = (event) => {
@@ -108,9 +108,6 @@ class SignupComponent extends Component {
     }
     changeConfirmPasswordHandler = (event) => {
         this.setState({ confirmPassword: event.target.value });
-    }
-    changeAcceptHandler = (event) => {
-        this.setState({ acceptedPolicy: !this.state.acceptedPolicy })
     }
     saveDeveloper = (event) => {
         event.preventDefault();
@@ -187,8 +184,14 @@ class SignupComponent extends Component {
                             <input type="checkbox" className
                                 ="mb-2 mr-sm-2" defaultChecked={this.state.player} onChange={this.changePlayerHandler} />
                             <label className="mb-2 mr-sm-2">Are you a player?</label>
+                            {this.state.playerError ? (<div className="text-danger">
+                                {this.state.playerError}
+                            </div>) : null}
                             <input type="checkbox" className="mb-2 mr-sm-2" defaultChecked={this.state.dm} onChange={this.changeDmHandler} />
                             <label className="mb-2 mr-sm-2">Are you a DM?</label>
+                            {this.state.dmError ? (<div className="text-danger">
+                                {this.state.dmError}
+                            </div>) : null}
                         </div>
 
                         <div className="form-group">
@@ -206,7 +209,7 @@ class SignupComponent extends Component {
                             </div>) : null}
                         </div>
 
-                        <div style={{ justifyContent: "center", display: "flex" }}>
+                        <div>
                             <button type="submit" className="btn btn-ligh btn-lg border m-2" variant="outline-primary" onClick={this.saveDeveloper}>Sign up</button>
                         </div>
                         {this.state.submitError ? (<div className="text-danger">
