@@ -126,13 +126,20 @@ class CreateThreadComponent extends Component {
                         onChange={this.changeOnlyAuthHandler} />
                     </label>
                     </div>
+
+                {this.state.spamError?(<p className="text-danger">{this.state.spamError}</p>):null}
+                <div className="row">
+                <div className="col">
+                    <button className="button5" onClick={() => this.goback()}>Back</button>
+                </div>
+                <div className="col">
                     {this.props.match.params[1] != null?
                     <button className="button5" variant="outline-success" onClick={this.saveThread}>Edit thread</button>
                          :
                     <button className="button5" variant="outline-success" onClick={this.saveThread}>Create thread</button>
                     }
-                {this.state.spamError?(<p className="text-danger">{this.state.spamError}</p>):null}
-                <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
+                </div>
+                </div>
             </form>
             </div>
             

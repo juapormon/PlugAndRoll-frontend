@@ -32,7 +32,10 @@ class OfferComponent extends Component {
 
   componentDidMount() {
     OfferService.findById(this.state.offerId).then(res => {
+      console.log(res)
       this.setState({ offer: res })
+      console.log(AuthService.getUserData())
+      console.log(res.creator.username)
       if (AuthService.getUserData().sub === res.creator.username) {
         ApplicationService.findApplicationsAcceptedByOfferId(this.state.offerId).then(res => {
           this.setState({ applications: res })
@@ -76,7 +79,10 @@ class OfferComponent extends Component {
           </div>
         </div>
       </div>
-      <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
+      <br/>
+      <div>
+      <button className="button5 btn-lg" onClick={() => this.goback()}>Back</button>
+      </div>
       <br/>
       <br/>
       </div>

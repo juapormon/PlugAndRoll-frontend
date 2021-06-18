@@ -294,8 +294,10 @@ class PublicationListComponent extends Component {
               </React.Fragment>
           )
           }
-
-          <button className="button5" style={{ float: "right" }} onClick={() => this.goback()}>Back</button>
+          <br/>
+          <div className="row">
+          <button className="button5 btn-lg" onClick={() => this.goback()}>Back</button>
+          </div>
         </div>
         <br />
         <div style={{ justifyContent: "center", display: "flex" }}>

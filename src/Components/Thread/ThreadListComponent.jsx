@@ -150,8 +150,9 @@ class ThreadListComponent extends Component {
                 </React.Fragment>
             )
             }
-
-            <button className="button5" style={{ float: "right" }} onClick={() => this.goback()}>Back</button>
+            <div>
+            <button className="button5" style={{float:"left"}} onClick={() => this.goback()}>Back</button>
+            </div>
             <br />
             <div style={{ justifyContent: "center", display: "flex" }}>
               {this.state.threads[0] !== undefined ?
