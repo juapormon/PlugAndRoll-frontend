@@ -281,7 +281,7 @@ class PublicationListComponent extends Component {
                         </div>
                         <div className="col" >
                           {AuthService.isAuthenticated() ?
-                            AuthService.getUserData().sub === publication.creator.username ?
+                            AuthService.getUserData().sub === publication.creator.username | AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN') ?
                               <button className="button4" style={{ float: "right" }} onClick={() => this.deletePublication(publication.id)}>Delete</button>
                               : null : null
                           }
