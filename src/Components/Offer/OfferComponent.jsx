@@ -32,7 +32,10 @@ class OfferComponent extends Component {
 
   componentDidMount() {
     OfferService.findById(this.state.offerId).then(res => {
+      console.log(res)
       this.setState({ offer: res })
+      console.log(AuthService.getUserData())
+      console.log(res.creator.username)
       if (AuthService.getUserData().sub === res.creator.username) {
         ApplicationService.findApplicationsAcceptedByOfferId(this.state.offerId).then(res => {
           this.setState({ applications: res })
@@ -45,6 +48,7 @@ class OfferComponent extends Component {
   getDetails() {
 
     return (
+      <div>
       <div className="card">
         <div className="card-header">
           <h3>Title: {this.state.offer.title}</h3>
@@ -74,6 +78,13 @@ class OfferComponent extends Component {
             </div>
           </div>
         </div>
+      </div>
+      <br/>
+      <div>
+      <button className="button5 btn-lg" onClick={() => this.goback()}>Back</button>
+      </div>
+      <br/>
+      <br/>
       </div>
     );
   }
@@ -188,7 +199,7 @@ class OfferComponent extends Component {
               <br />
             </div>
             {AuthService.getUserData().sub === this.state.offer.creator.username ?
-              <div>
+              <div className="text-center ">
                 <h2>Applications:</h2>
                 <button className="button5" onClick={() => this.acceptedApplications()}>Accepted</button>
                 <button className="button5" onClick={() => this.pendingApplications()}>Pending</button>
@@ -197,7 +208,6 @@ class OfferComponent extends Component {
               </div>
               : null}
               
-           <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
           </React.Fragment>
           :
           this.props.history.push("/login")

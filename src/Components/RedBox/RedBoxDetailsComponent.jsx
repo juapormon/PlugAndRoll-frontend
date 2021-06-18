@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { AuthService } from '../../Services/AuthService';
 import { RedBoxService } from '../../Services/RedBoxService';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { Col, Row } from 'react-bootstrap';
-import Image from 'react-bootstrap/Image';
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
 
@@ -49,7 +45,7 @@ class RedBoxDetailsComponent extends Component {
                     tokens: data.tokens,
                     creator: data.creator
                 });
-                if (AuthService.getUserData()['id'] === this.state.creator.id)
+                if (AuthService.getUserData().sub === this.state.creator.username)
                     this.props.history.push("/redboxUpdate/" + this.state.id)
                 if (AuthService.getUserData().auth.some(e => e.authority == 'ROLE_ADMIN'))
                     this.setState({ admin: true })
@@ -58,17 +54,17 @@ class RedBoxDetailsComponent extends Component {
     }
 
     decodeArrayBuffer = (input) => {
-        var bytes = (input.length/4) * 3;
+        var bytes = (input.length / 4) * 3;
         var ab = new ArrayBuffer(bytes);
         this.decode(input, ab);
-        
+
         return ab;
     }
 
     removePaddingChars = (input) => {
         var lkey = _keyStr.indexOf(input.charAt(input.length - 1));
-        if(lkey == 64){
-            return input.substring(0,input.length - 1);
+        if (lkey == 64) {
+            return input.substring(0, input.length - 1);
         }
         return input;
     }
@@ -79,37 +75,37 @@ class RedBoxDetailsComponent extends Component {
         input = this.removePaddingChars(input);
 
         var bytes = parseInt((input.length / 4) * 3, 10);
-        
+
         var uarray;
         var chr1, chr2, chr3;
         var enc1, enc2, enc3, enc4;
         var i = 0;
         var j = 0;
-        
+
         if (arrayBuffer)
             uarray = new Uint8Array(arrayBuffer);
         else
             uarray = new Uint8Array(bytes);
-        
+
         input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-        
-        for (i=0; i<bytes; i+=3) {	
+
+        for (i = 0; i < bytes; i += 3) {
             //get the 3 octects in 4 ascii chars
             enc1 = _keyStr.indexOf(input.charAt(j++));
             enc2 = _keyStr.indexOf(input.charAt(j++));
             enc3 = _keyStr.indexOf(input.charAt(j++));
             enc4 = _keyStr.indexOf(input.charAt(j++));
-    
+
             chr1 = (enc1 << 2) | (enc2 >> 4);
             chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
             chr3 = ((enc3 & 3) << 6) | enc4;
-    
-            uarray[i] = chr1;			
-            if (enc3 != 64) uarray[i+1] = chr2;
-            if (enc4 != 64) uarray[i+2] = chr3;
+
+            uarray[i] = chr1;
+            if (enc3 != 64) uarray[i + 1] = chr2;
+            if (enc4 != 64) uarray[i + 2] = chr3;
         }
-    
-        return uarray;	
+
+        return uarray;
     }
 
     downloadRedBox = (e) => {
@@ -117,16 +113,16 @@ class RedBoxDetailsComponent extends Component {
         let zip = new JSZip();
         zip.file("story.txt", atob(this.state.story));
         let i = 1;
-        this.state.maps.map( map => { zip.file("map" + i + ".png", this.decode(map)); i++; })
+        this.state.maps.map(map => { zip.file("map" + i + ".png", this.decode(map)); i++; })
         i = 1;
-        this.state.music.map( music => { zip.file("music" + i + ".mp3", this.decode(music)); i++; })
+        this.state.music.map(music => { zip.file("music" + i + ".mp3", this.decode(music)); i++; })
         i = 1;
-        this.state.npcs.map( npc => { zip.file("npc" + i + ".png", this.decode(npc)); i++; })
+        this.state.npcs.map(npc => { zip.file("npc" + i + ".png", this.decode(npc)); i++; })
         i = 1;
-        this.state.pcs.map( pc => { zip.file("pc" + i + ".pdf", this.decode(pc)); i++; })
+        this.state.pcs.map(pc => { zip.file("pc" + i + ".pdf", this.decode(pc)); i++; })
         i = 1;
-        this.state.tokens.map( token => { zip.file("token" + i + ".png", this.decode(token)); i++; })
-        zip.generateAsync({type: "blob"}).then(function(content) {
+        this.state.tokens.map(token => { zip.file("token" + i + ".png", this.decode(token)); i++; })
+        zip.generateAsync({ type: "blob" }).then(function (content) {
             FileSaver.saveAs(content, "redbox.zip");
         });
     }
@@ -143,45 +139,29 @@ class RedBoxDetailsComponent extends Component {
 
     render() {
         return (
-            <div>
-                <h2 style={{ display: "flex", justifyContent: "center" }}>{this.state.title}</h2>
-                <br />
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                    <p>{atob(this.state.story.substring(0, 200))}...</p>
-                </div>
-                <br />
-                <div>
-                    {this.state.maps.map(map => <Image src={"data:image/png;base64," + map} style={{ maxWidth: '200px', maxHeight: '150px' }} />)}
-                </div>
-                <br />
-                <div>
-                    {this.state.music.map(music =>
-                        <audio controls>
-                            <source src={"data:audio/mp3;base64," + music} type="audio/ogg" />
-                            <source src={"data:audio/mp3;base64," + music} type="audio/mpeg" />
-                            <source src={"data:audio/mp3;base64," + music} type="audio/mp3" />
-                            Your browser does not support the audio element.
-                        </audio>
-                    )}
-                </div>
-                <br />
-                <div>
-                    {this.state.npcs.map(npc => <Image src={"data:image/png;base64," + npc} style={{ maxWidth: '200px', maxHeight: '150px' }} />)}
-                </div>
-                <br />
-                <div>
-                    {this.state.pcs.map(pc => <Button onClick={() => window.open("data:application/pdf;base64," + pc)}>Character</Button>)}
-                </div>
-                <br />
-                <div>
-                    {this.state.tokens.map(token => <Image src={"data:image/png;base64," + token} style={{ maxWidth: '200px', maxHeight: '150px' }} />)}
-                </div>
-                <br />
-                <div>
-                    <Button variant="outline-success" onClick={this.downloadRedBox}>Descargar!</Button>
-                    { this.state.admin ? 
-                        <Button onClick={this.deleteRedBox}>Delete Red Box</Button> 
-                    : null}
+            <div className="container">
+                <div className="row justify-content-center align-items-center">
+                    <div className="justify-content-center align-items-center shadow-lg p-5 mb-4 bg-secondary">
+                        <h2 style={{ display: "flex", justifyContent: "center" }}>{this.state.title}</h2>
+                        <br />
+                        <p>Story preview: {atob(this.state.story.substring(0, 200))}...</p>
+                        <p>Maps: {this.state.maps.map(map => <img src={"data:image/png;base64," + map} style={{ maxWidth: '200px', maxHeight: '150px' }} />)}</p>
+                        <p>Music: {this.state.music.map(music =>
+                            <audio controls>
+                                <source src={"data:audio/mp3;base64," + music} type="audio/ogg" />
+                                <source src={"data:audio/mp3;base64," + music} type="audio/mpeg" />
+                                <source src={"data:audio/mp3;base64," + music} type="audio/mp3" />
+                                Your browser does not support the audio element.
+                            </audio>
+                        )}</p>
+                        <p>NPCs: {this.state.npcs.map(npc => <img src={"data:image/png;base64," + npc} style={{ maxWidth: '200px', maxHeight: '150px' }} />)}</p>
+                        <p>PCs: {this.state.pcs.map(pc => <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={() => window.open("data:application/pdf;base64," + pc)}>Character</button>)}</p>
+                        <p>Tokens: {this.state.tokens.map(token => <img src={"data:image/png;base64," + token} style={{ maxWidth: '200px', maxHeight: '150px' }} />)}</p>
+                        <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={this.downloadRedBox}>Download!</button>
+                        {this.state.admin ?
+                            <button className="btn btn-ligh btn-lg border m-2 btn-sm" variant="outline-primary" onClick={this.deleteRedBox}>Delete Red Box</button>
+                            : null}
+                    </div>
                 </div>
             </div>
         );

@@ -13,14 +13,12 @@ class FooterComponent extends Component {
     }
     render() {
         return (
-            <div>
-                <footer className="footer">
-                    <span className="text-muted">All rights reserved</span>
-                    <p><span className="text-muted"> Powered with:
-                   <a href="https://spring.io"><img src={springLogo} style={{ marginLeft: "5px" }} width="35" height="35" /></a> and <a href="https://es.reactjs.org"><img src={reactLogo} width="37" height="37" /></a>
-                    </span></p>
-                </footer>
-            </div>
+            <footer className="bg-secondary text-center text-lg-start border border-right-0 border-bottom-0 border-left-0 border-dark">
+                <span>All rights reserved</span>
+                <p><span>Powered with:
+                    <a href="https://spring.io"><img src={springLogo} style={{ marginLeft: "5px" }} width="35" height="35" /></a> and <a href="https://es.reactjs.org"><img src={reactLogo} width="37" height="37" /></a>
+                </span></p>
+            </footer>
         );
     }
 }

@@ -19,13 +19,13 @@ class SignupComponent extends Component {
             email: "",
             emailError: "",
             player: false,
+            playerError: "",
             dm: false,
+            dmError: "",
             password: "",
             passwordError: "",
             confirmPassword: "",
             confirmPasswordError: "",
-            acceptedPolicy: false,
-            acceptedError: "",
             submitError: ""
         }
 
@@ -36,7 +36,6 @@ class SignupComponent extends Component {
         this.changeDmHandler = this.changeDmHandler.bind(this);
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.changeConfirmPasswordHandler = this.changeConfirmPasswordHandler.bind(this);
-        this.changeAcceptHandler = this.changeAcceptHandler.bind(this);
     }
 
     componentDidMount() {
@@ -48,9 +47,10 @@ class SignupComponent extends Component {
     validate = () => {
         let usernameError = "";
         let emailError = "";
+        let playerError = "";
+        let dmError = "";
         let passwordError = "";
         let confirmPasswordError = "";
-        let acceptedError = "";
 
         if (this.state.username.trim().length === 0) {
             usernameError = "Username cannot be empty";
@@ -61,6 +61,10 @@ class SignupComponent extends Component {
         }
         if (this.state.email.length === 0) {
             emailError = "Email cannot be empty";
+        }
+        if (!this.state.player && !this.state.dm) {
+            playerError = "You need to choose a role!";
+            dmError = "You need to choose a role!";
         }
         var passwordPattern = new RegExp(/(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[a-zA-Z0-9!"#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}/)
         if (!passwordPattern.test(this.state.password)) {
@@ -75,16 +79,14 @@ class SignupComponent extends Component {
         if (this.state.confirmPassword.length === 0) {
             confirmPasswordError = "Password confirmation cannot be empty";
         }
-        if (!this.state.acceptedPolicy) {
-            acceptedError = "You have to agree to the terms and conditions for signing up!";
-        }
 
         this.setState({ usernameError });
         this.setState({ emailError });
+        this.setState({ playerError });
+        this.setState({ dmError });
         this.setState({ passwordError });
         this.setState({ confirmPasswordError });
-        this.setState({ acceptedError });
-        if (usernameError || emailError || passwordError || confirmPasswordError || acceptedError) {
+        if (usernameError || emailError || playerError || dmError || passwordError || confirmPasswordError) {
             return false;
         } else {
             return true;
@@ -97,10 +99,10 @@ class SignupComponent extends Component {
     changeEmailHandler = (event) => {
         this.setState({ email: event.target.value });
     }
-    changePlayerHandler = (event) => {
+    changePlayerHandler = () => {
         this.setState({ player: !this.state.player })
     }
-    changeDmHandler = (event) => {
+    changeDmHandler = () => {
         this.setState({ dm: !this.state.dm })
     }
     changePasswordHandler = (event) => {
@@ -108,9 +110,6 @@ class SignupComponent extends Component {
     }
     changeConfirmPasswordHandler = (event) => {
         this.setState({ confirmPassword: event.target.value });
-    }
-    changeAcceptHandler = (event) => {
-        this.setState({ acceptedPolicy: !this.state.acceptedPolicy })
     }
     saveDeveloper = (event) => {
         event.preventDefault();
@@ -163,91 +162,69 @@ class SignupComponent extends Component {
 
     render() {
         return (
-            <form>
-                <br />
-                <br />
-                <br />
-                <Form className="FormStyle">
-                    <h2 style={{ textAlign: "center" }}>Sign up</h2>
-                    <br />
+            <div className="text-center container">
+                <div className="row justify-content-center align-items-center minh-85">
+                    <form className="shadow-lg p-5 mb-4 bg-secondary">
+                        <h2>Sign up</h2>
 
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Username:</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="text" className="FormInput" placeholder="Username" value={this.state.username} onChange={this.changeUsernameHandler} />
-                            {this.state.usernameError ? (<div className="ValidatorMessage">
+                        <div className="form-group">
+                            <label>Username:</label>
+                            <input type="text" placeholder="Username" className="form-control form-control-sm w-50 mx-auto"
+                                value={this.state.username} onChange={this.changeUsernameHandler} />
+                            {this.state.usernameError ? (<div className="text-danger">
                                 {this.state.usernameError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Email:</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="email" className="FormInput" placeholder="Enter email" value={this.state.email} onChange={this.changeEmailHandler} />
-                            {this.state.emailError ? (<div className="ValidatorMessage">
+                            <label>Email:</label>
+                            <input type="email" placeholder="Enter email" className="form-control form-control-sm w-50 mx-auto"
+                                value={this.state.email} onChange={this.changeEmailHandler} />
+                            {this.state.emailError ? (<div className="text-danger">
                                 {this.state.emailError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
+                        </div>
 
-                    <Form.Group as={Row}>
-                        <Col sm="10">
-                            <Form.Control type="checkbox" defaultChecked={this.state.player} onChange={this.changePlayerHandler} />
-                            <Form.Label column sm="1">Are you a player?</Form.Label>
-                        </Col>
-                        <Col sm="10">
-                            <Form.Control type="checkbox" defaultChecked={this.state.dm} onChange={this.changeDmHandler} />
-                            <Form.Label column sm="1">Are you a DM?</Form.Label>
-                        </Col>
-                    </Form.Group>
+                        <div className="form-group">
+                            <input type="checkbox" className
+                                ="mb-2 mr-sm-2" defaultChecked={this.state.player} onChange={this.changePlayerHandler} />
+                            <label className="mb-2 mr-sm-2">Are you a player?</label>
+                            {this.state.playerError ? (<div className="text-danger">
+                                {this.state.playerError}
+                            </div>) : null}
+                            <input type="checkbox" className="mb-2 mr-sm-2" defaultChecked={this.state.dm} onChange={this.changeDmHandler} />
+                            <label className="mb-2 mr-sm-2">Are you a DM?</label>
+                            {this.state.dmError ? (<div className="text-danger">
+                                {this.state.dmError}
+                            </div>) : null}
+                        </div>
 
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Password:</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="password" className="FormInput" placeholder="Enter password" value={this.state.password} onChange={this.changePasswordHandler} />
-                            {this.state.passwordError ? (<div className="ValidatorMessage">
+                        <div className="form-group">
+                            <label>Password:</label>
+                            <input type="password" placeholder="Enter password" className="form-control form-control-sm w-50 mx-auto"
+                                value={this.state.password} onChange={this.changePasswordHandler} />
+                            {this.state.passwordError ? (<div className="text-danger">
                                 {this.state.passwordError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="1">Confirm password:</Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="password" className="FormInput" placeholder="Confirm password" value={this.state.confirmPassword} onChange={this.changeConfirmPasswordHandler} />
-                            {this.state.confirmPasswordError ? (<div className="ValidatorMessage">
+                            <label>Confirm password:</label>
+                            <input type="password" placeholder="Confirm password" className="form-control form-control-sm w-50 mx-auto"
+                                value={this.state.confirmPassword} onChange={this.changeConfirmPasswordHandler} />
+                            {this.state.confirmPasswordError ? (<div className="text-danger">
                                 {this.state.confirmPasswordError}
                             </div>) : null}
-                        </Col>
-                    </Form.Group>
+                        </div>
 
-                    <Form.Group as={Row}>
-                        <Col sm="10">
-                            <Form.Control type="checkbox" defaultChecked={this.state.acceptedPolicy} onChange={this.changeAcceptHandler} />
-                            <Form.Label column sm="1">I have read and accept the <a href="/termsAndConditions">Terms and Conditions</a> and the <a href="/privacyPolicy">Privacy Policy</a> of the website</Form.Label>
-                            {this.state.acceptedError ? (<div className="ValidatorMessage">
-                                {this.state.acceptedError}
-                            </div>) : null}
-                        </Col>
-                    </Form.Group>
+                        <div>
+                            <button type="submit" className="btn btn-ligh btn-lg border m-2" variant="outline-primary" onClick={this.saveDeveloper}>Sign up</button>
+                        </div>
+                        {this.state.submitError ? (<div className="text-danger">
+                            {this.state.submitError}
+                        </div>) : null}
+                        {this.state.spamError ? (<p className="text-danger">{this.state.spamError}</p>) : null}
 
-                    <div style={{ justifyContent: "center", display: "flex" }}>
-                        <Button type="submit" variant="outline-primary" onClick={this.saveDeveloper}>Sign up</Button>
-                    </div>
-                    {this.state.submitError ? (<div className="ValidatorMessage">
-                        {this.state.submitError}
-                    </div>) : null}
-
-                    <p className="already-registered text-right">
-                        Already registered? <a href="/login">log in</a>
-                    </p>
-                    <p className="already-registered text-right">
-                        Lost password? <a href="/recoverPassword">Recover your password</a>
-                    </p>
-                    {this.state.spamError ? (<p className="text-danger">{this.state.spamError}</p>) : null}
-                </Form>
-            </form>
+                        <div className="form-group">
+                            <p className="mx-auto">Already registered? <a href="/login">log in</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
         );
     }
 }

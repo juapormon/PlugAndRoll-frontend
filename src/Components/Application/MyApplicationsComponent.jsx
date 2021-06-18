@@ -254,9 +254,9 @@ class MyApplicationsComponent extends Component {
         <div className="row">
         {this.paginateDM()}
         </div>
-        <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
-        </div>
       </div>
+      </div>
+        <button className="button5" onClick={() => this.goback()}>Back</button>
       </div>
       :
       <React.Fragment>

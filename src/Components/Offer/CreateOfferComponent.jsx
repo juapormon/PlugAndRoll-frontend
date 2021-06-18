@@ -150,9 +150,14 @@ class CreateOfferComponent extends Component {
                                 value={this.state.price} onChange={this.changePriceHandler} />
                         {this.state.priceError ? (<div className="ValidatorMessage">{this.state.priceError}</div>) : null}
                     </div>
-
-                    <button className="button5" variant="outline-success" onClick={this.saveOffer}>Create offer</button>
-                    <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
+                    <div className="row">
+                    <div className="col">
+                    <button className="button5 btn-lg" onClick={() => this.goback()}>Back</button>
+                    </div>
+                    <div className="col">
+                    <button className="button6 btn-lg" variant="outline-success" onClick={this.saveOffer}>Create offer</button>
+                    </div>
+                    </div>
                 {this.state.spamError?(<p className="text-danger">{this.state.spamError}</p>):null}
             </form>
             </React.Fragment>
@@ -165,8 +170,8 @@ class CreateOfferComponent extends Component {
 
     render() {
         return (
-            <div>
-                {this.createForm()}
+            <div className="text-center container">
+                {this.createForm()} 
             </div>
         );
     }

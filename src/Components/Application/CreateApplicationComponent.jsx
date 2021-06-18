@@ -81,19 +81,31 @@ class CreateApplicationComponent extends Component {
     createForm(){
         return(
             <React.Fragment>
-            <br></br>
-            <br></br>
+            <br/>
+            <br/>
             <form >
-                <h2 className="text-center">Apply to offer</h2>
+                
                     <div className="form-group">
-                        <label column sm="1">Date:</label>
+                    <h2>Apply to offer</h2>
+                    <br/>
+                    <br/>
+                        <label >Date:</label>
                     <input type="date" className="FormInput" value={this.state.date} onChange={this.changeDateHandler}/>
                     {this.state.dateError ? (<div className="ValidatorMessage">
                     {this.state.dateError}
                     </div>) : null}
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div className="row">
+                        <div className="col">
+                        <button className="button5 btn-lg"  variant="outline-success" onClick={() => this.goback()}>Back</button>
+                        </div>
+                        <div className="col">
+                        <button className="button4 btn-lg" variant="outline-success" onClick={this.saveApplication}>Apply</button>
+                        </div>
                     </div>
-                    <button className="button5" style={{float:"right"}} onClick={() => this.goback()}>Back</button>
-                    <button style={{float:"right"}} className="button4" variant="outline-success" onClick={this.saveApplication}>Apply</button>
+                    </div>
                     </form>
             </React.Fragment>
         )
@@ -101,11 +113,30 @@ class CreateApplicationComponent extends Component {
 
     render() {
         return (
-            <div>
+            
+            <div className="text-center container">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
                 {AuthService.isAuthenticated()?
                 this.createForm()
                 :null
                 }
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             </div>
         );
     }
