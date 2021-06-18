@@ -69,7 +69,7 @@ class LoginComponent extends Component {
                 if (typeof data == "string") {
                     let authenticated = AuthService.authenticate(this.state.username, this.state.password, data);
                     if (authenticated) {
-                        window.location.href = '/coaching';
+                        window.location.href = '/';
                     }
                 } else {
                     this.setState({ submitError: "Invalid credentials!" });
@@ -108,12 +108,7 @@ class LoginComponent extends Component {
                         </div>) : null}
 
                         <div className="form-group">
-                            <p>
-                                Not registered yet? <a href="/sign-up">sign up!</a>
-                            </p>
-                            <p>
-                                Lost password? <a href="/recoverPassword">Recover your password</a>
-                            </p>
+                            <p className="mx-auto">Not registered yet? <a href="/signup">sign up!</a></p>
                         </div>
                     </form>
                 </div>

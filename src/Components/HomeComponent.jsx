@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import cajaroja from '../assets/cajaroja.jpg';
+import cajaroja from '../assets/lostMineOfPhandelver.jpeg';
 
 class HomeComponent extends Component {
 
@@ -12,10 +12,8 @@ class HomeComponent extends Component {
     }
     render() {
         return (
-            <div>
-
-            <img src={cajaroja}  width="400" height="800"/>
-
+            <div class="has-bg-img">
+                <img class="bg-img" src={cajaroja} alt="Card image" width="100%"/>
             </div>
         );
     }

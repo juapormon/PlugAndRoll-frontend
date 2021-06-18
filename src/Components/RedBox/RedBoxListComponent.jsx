@@ -41,12 +41,12 @@ class RedBoxListComponent extends Component {
         })
     }
     loadMoreData() {
-      const data = this.state.rawRedBoxes;
-      const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-      this.setState({
-        pageCount: Math.ceil(data.length / this.state.perPage),
-        redBoxes: slice
-      })
+        const data = this.state.rawRedBoxes;
+        const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+        this.setState({
+            pageCount: Math.ceil(data.length / this.state.perPage),
+            redBoxes: slice
+        })
     }
 
     render() {
@@ -69,17 +69,19 @@ class RedBoxListComponent extends Component {
                             </a>
                         </div>
                     )}
-                    <ReactPaginate previousLabel={"prev"}
-                        nextLabel={"next"}
-                        breakLabel={"..."}
-                        breakClassName={"break-me"}
-                        pageCount={this.state.pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={this.handlePageClick}
-                        containerClassName={"pagination"}
-                        subContainerClassName={"pages pagination"}
-                        activeClassName={"active"} />
+                    {this.state.redBoxes[0] !== undefined ?
+                        <ReactPaginate previousLabel={"prev"}
+                            nextLabel={"next"}
+                            breakLabel={"..."}
+                            breakClassName={"break-me"}
+                            pageCount={this.state.pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={"pagination"}
+                            subContainerClassName={"pages pagination"}
+                            activeClassName={"active"} />
+                        : null}
                 </div>
             </div>
         );

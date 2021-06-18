@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../../assets/logomejorado.png'
+import logo from '../../assets/Plug&Roll-RedLettersBlackBackground.png'
 import '../../App.css';
 import { AuthService } from '../../Services/AuthService';
 
@@ -33,7 +33,7 @@ class HeaderComponent extends Component {
       <div>
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark" id="myTopnav">
           <a className="navbar-brand" href="/">
-            <img src={logo} alt="logo" style={{ width: '55px' }} />
+            <img src={logo} alt="logo" style={{ width: '200px' }} />
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -41,10 +41,10 @@ class HeaderComponent extends Component {
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="/redbox">Cajas Rojas</a>
+                <a className="nav-link" href="/redbox">Red Boxes</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/forums">Foros</a>
+                <a className="nav-link" href="/forums">Forums</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/coaching">Coaching</a>
