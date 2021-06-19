@@ -19,13 +19,17 @@ export const ForumService = {
             return axios.get(UrlProvider.getForumURL() + "/findByRole", {
                 headers: {
                     'Authorization': 'Bearer ' + token,
-                    'Accept': '*/*'
+                    'Accept': '*/*',
+                    'Access-Control-Allow-Origin': '*'
                 }
             }).then(res => res.data).catch(error => {return error.response.status})
         })
     },
     async getForumsNoAuth() {
         return axios.get(UrlProvider.getForumURL() + "/findForums", {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
         }).then(res => res.data).catch(error => {return error.response.status})
     }
 }
