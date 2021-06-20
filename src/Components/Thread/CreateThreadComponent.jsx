@@ -26,25 +26,26 @@ class CreateThreadComponent extends Component {
     }
     componentDidMount(){
         console.log(this.props)
+        ForumService.findById(res.forum.id).then(res => {
+            if (res.type.length < 3) {
+              if (!AuthService.isAuthenticated()) {
+                this.props.history.push("/login");
+              } else if (!AuthService.getUserData().auth.some(e => e.authority == "ROLE_ADMIN")) {
+                if ((!AuthService.getUserData().auth.some(e => e.authority == "ROLE_PLAYER") & res.type.includes("PLAYER")) ||
+                  (!AuthService.getUserData().auth.some(e => e.authority == "ROLE_DM") & res.type.includes("DM")) ||
+                  (res.type.includes("ADMIN") & res.type.length == 1)){
+                  this.props.history.push("/");
+                }
+              }
+            }
+        })
         if(this.props.match.params[1]){
             ThreadService.findById(this.props.match.params[1]).then((res)=>{
                 this.setState({
                     title:res.title,
                     onlyAuth:res.onlyAuth
                 })
-                ForumService.findById(res.forum.id).then(res => {
-                    if (res.type.length < 3) {
-                      if (!AuthService.isAuthenticated()) {
-                        this.props.history.push("/login");
-                      } else if (!AuthService.getUserData().auth.some(e => e.authority == "ROLE_ADMIN")) {
-                        if ((!AuthService.getUserData().auth.some(e => e.authority == "ROLE_PLAYER") & res.type.includes("PLAYER")) ||
-                          (!AuthService.getUserData().auth.some(e => e.authority == "ROLE_DM") & res.type.includes("DM")) ||
-                          (res.type.includes("ADMIN") & res.type.length == 1)){
-                          this.props.history.push("/");
-                        }
-                      }
-                    }
-                  })
+
             })
         }
     }
