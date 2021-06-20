@@ -26,7 +26,7 @@ class CreateThreadComponent extends Component {
     }
     componentDidMount(){
         console.log(this.props)
-        ForumService.findById(res.forum.id).then(res => {
+        ForumService.findById(this.props.match.params[0]).then(res => {
             if (res.type.length < 3) {
               if (!AuthService.isAuthenticated()) {
                 this.props.history.push("/login");
