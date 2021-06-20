@@ -3,6 +3,7 @@ import { ThreadService } from '../../Services/ThreadService';
 import { SpamService } from '../../Services/SpamService';
 import {Checkbox} from 'primereact/checkbox';
 import { ForumService } from '../../Services/ForumService';
+import { AuthService } from '../../Services/AuthService';
 
 
 class CreateThreadComponent extends Component {
@@ -31,6 +32,19 @@ class CreateThreadComponent extends Component {
                     title:res.title,
                     onlyAuth:res.onlyAuth
                 })
+                ForumService.findById(res.forum.id).then(res => {
+                    if (res.type.length < 3) {
+                      if (!AuthService.isAuthenticated()) {
+                        this.props.history.push("/login");
+                      } else if (!AuthService.getUserData().auth.some(e => e.authority == "ROLE_ADMIN")) {
+                        if ((!AuthService.getUserData().auth.some(e => e.authority == "ROLE_PLAYER") & res.type.includes("PLAYER")) ||
+                          (!AuthService.getUserData().auth.some(e => e.authority == "ROLE_DM") & res.type.includes("DM")) ||
+                          (res.type.includes("ADMIN") & res.type.length == 1)){
+                          this.props.history.push("/");
+                        }
+                      }
+                    }
+                  })
             })
         }
     }
