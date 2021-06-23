@@ -16,14 +16,8 @@ export const ThreadService = {
     },
 
     async findById(threadId) {
-        return AuthService.getToken().then(token => {
-            return axios.get(UrlProvider.getThreadURL() + "/" + threadId, {
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Accept': '*/*'
-                }
-            }).then(res => res.data).catch(error => {return error.response.status})
-        })
+            return axios.get(UrlProvider.getThreadURL() + "/" + threadId)
+            .then(res => res.data).catch(error => {return error.response.status})
     },
 
     async findByForumNoAuth(forumId) {

@@ -21,6 +21,7 @@ import CreateApplicationComponent from './Components/Application/CreateApplicati
 import CreateOfferComponent from './Components/Offer/CreateOfferComponent';
 import MyApplicationsComponent from './Components/Application/MyApplicationsComponent';
 import OfferComponent from './Components/Offer/OfferComponent';
+import PanicComponent from './Components/PanicComponent';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
               <Route path="/offers/*/offerDetails" exact component={OfferComponent}></Route>
               <Route path="/offers/*/apply" exact component={CreateApplicationComponent}></Route>
               <Route path="/myApplications" exact component={MyApplicationsComponent}></Route>
+              <Route path="/panic" exact component={PanicComponent}></Route>
             </Switch>
           </div>
         </body>

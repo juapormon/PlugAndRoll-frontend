@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080"
+const baseUrl = "https://plugandroll-backend.herokuapp.com"
 const userUrl = "/users"
 const meUrl = '/me'
 const redBoxURL = '/redbox'
